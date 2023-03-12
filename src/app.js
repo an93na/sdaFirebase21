@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import { getStorage, uploadBytes } from "firebase/storage";
-import { getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -127,6 +127,7 @@ listAll(storageRef).then(res => {
   res.items.forEach(item => {
     let newOla = document.createElement("li");
     const przycisk = document.createElement("button");
+    const przyciskDel = document.createElement("button");
 
     przycisk.addEventListener("click", () => {
     const imageRef = ref(storage,item.name);
@@ -140,10 +141,25 @@ listAll(storageRef).then(res => {
     // console.log(imageRef)
   });
   
+
+    przyciskDel.addEventListener("click", () => {
+    const imageRef = ref(storage,item.name);
+
+    deleteObject(imageRef).then( url => { 
+    // console.log("usunięto")
+    location.reload();}
+        
+      )
+
+    // console.log(imageRef)
+  });
+
     przycisk.innerText= "Naciśnij Proszę"
+    przyciskDel.innerText = "Usuń"
     newOla.innerText = item.name;
 
     Ola.appendChild(newOla);
     newOla.appendChild(przycisk);
+    newOla.appendChild(przyciskDel);
   });
 });
