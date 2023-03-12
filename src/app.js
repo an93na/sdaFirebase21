@@ -48,6 +48,7 @@ myFunc();
 const headerInfo = document.getElementById("myHeader");
 const mojButton = document.getElementById("myButton");
 const tekstUzytkownika = document.getElementById("tekstUzytkownika")
+const img = document.createElement("img");
 
 mojButton.addEventListener("click", () => {
   //console.log('Kliknięto przcisk')
@@ -60,9 +61,18 @@ mojButton.addEventListener("click", () => {
     }
     const imageRef = ref(storage, fileName);
     
+    
+
     uploadBytes(imageRef, file).then(() => {
       console.log("Sukces!");
       headerInfo.innerText= "Przesłano"
+      
+      getDownloadURL(imageRef).then(url => {  
+      img.src = url;
+      img.style.width = "250px";
+      document.body.appendChild(img);
+    })
+
     })
   }
 ) 
@@ -73,22 +83,24 @@ mojButton.addEventListener("click", () => {
 //4. Przekazac nazwe do refa
 //5. Wyswietlic blad w headerInfo
 
-const myShowFileNameInput = document.getElementById("myShowFileName");
-const showPhoto = document.getElementById("showPhoto")
+// const myShowFileNameInput = document.getElementById("myShowFileName");
+// const showPhoto = document.getElementById("showPhoto")
+// const img = document.createElement("img");
 
-showPhoto.addEventListener("click", () => {
-  const imageRef = ref(storage, myShowFileNameInput.value);
-
-  getDownloadURL(imageRef).then(url => {  
-  const img = document.createElement("img");
-  img.src = url;
-  img.style.width = "250px";
-  document.body.appendChild(img);
-})
-.catch(ex => {
-  headerInfo.innerText = "FOTO NIE ISTNIEJE!!!"
-})}
-)
+// showPhoto.addEventListener("click", () => {
+//   const imageRef = ref(storage, myShowFileNameInput.value);
+  
+//   headerInfo.innerText = "";
+//   getDownloadURL(imageRef).then(url => {  
+  
+//   img.src = url;
+//   img.style.width = "250px";
+//   document.body.appendChild(img);
+// })
+// .catch(ex => {
+//   headerInfo.innerText = "FOTO NIE ISTNIEJE!!!"
+// })}
+// )
 
 
 
