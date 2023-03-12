@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import { getStorage, uploadBytes } from "firebase/storage";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -66,3 +66,29 @@ mojButton.addEventListener("click", () => {
     })
   }
 ) 
+
+//1. Dodac Input do podawania nazwy obrazka
+//2. Dodac przycisk do wyswietlania obrazka
+//3. Na klikniecie przycisku wyswietlic zdjecie
+//4. Przekazac nazwe do refa
+//5. Wyswietlic blad w headerInfo
+
+const myShowFileNameInput = document.getElementById("myShowFileName");
+const showPhoto = document.getElementById("showPhoto")
+
+showPhoto.addEventListener("click", () => {
+  const imageRef = ref(storage, myShowFileNameInput.value);
+
+  getDownloadURL(imageRef).then(url => {  
+  const img = document.createElement("img");
+  img.src = url;
+  img.style.width = "250px";
+  document.body.appendChild(img);
+})
+.catch(ex => {
+  headerInfo.innerText = "FOTO NIE ISTNIEJE!!!"
+})}
+)
+
+
+
