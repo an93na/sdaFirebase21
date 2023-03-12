@@ -4,7 +4,8 @@ import './../styles/styles.css'
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getStorage } from "firebase/storage";
+// import { getStorage, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -32,3 +33,36 @@ const link = "https://reqres.in/api/users?page=2"
 fetch(link)
 .then((daneZPromisa) => daneZPromisa.json())
 .then((danezJSON) => console.log(danezJSON.data));
+
+
+async function myFunc () {
+  const data = await fetch("https://reqres.in/api/users")
+  const users = await data.json();
+  console.log(users.data);
+}
+
+myFunc();
+
+
+
+const headerInfo = document.getElementById("myHeader");
+const mojButton = document.getElementById("myButton");
+const tekstUzytkownika = document.getElementById("tekstUzytkownika")
+
+mojButton.addEventListener("click", () => {
+  //console.log('Kliknięto przcisk')
+    headerInfo.innerText= "Przesyłam..."
+    const file = document.getElementById("myFile").files[0];
+    let fileName = file.name;
+
+    if(tekstUzytkownika.value){
+      fileName = tekstUzytkownika.value
+    }
+    const imageRef = ref(storage, fileName);
+    
+    uploadBytes(imageRef, file).then(() => {
+      console.log("Sukces!");
+      headerInfo.innerText= "Przesłano"
+    })
+  }
+) 
