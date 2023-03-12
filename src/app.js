@@ -27,3 +27,8 @@ const url = "https://firebasestorage.googleapis.com/v0/b/moj121frontpol.appspot.
 const obrazek = document.createElement("img");
 obrazek.setAttribute("src", url);  //img.src =
 document.body.appendChild(obrazek);
+
+const link = "https://reqres.in/api/users?page=2"
+fetch(link)
+.then((daneZPromisa) => daneZPromisa.json())
+.then((danezJSON) => console.log(danezJSON.data));
