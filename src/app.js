@@ -119,7 +119,7 @@ const storage = getStorage(app);
 //      Ola.appendChild(newOla)  // li dodajemy do ol - appendChild  
 //   }
 // });
-
+const img = document.createElement("img");
 const storageRef = ref(storage);
 listAll(storageRef).then(res => {
   const Ola = document.getElementById("photoList");
@@ -128,8 +128,18 @@ listAll(storageRef).then(res => {
     let newOla = document.createElement("li");
     const przycisk = document.createElement("button");
 
-    przycisk.addEventListener("click", () => console.log("Siemanko"));
+    przycisk.addEventListener("click", () => {
+    const imageRef = ref(storage,item.name);
+    
+    getDownloadURL(imageRef).then(url => {  
+        img.src = url;
+        img.style.width = "250px";
+        document.body.appendChild(img);
+      })
 
+    // console.log(imageRef)
+  });
+  
     przycisk.innerText= "Naciśnij Proszę"
     newOla.innerText = item.name;
 
