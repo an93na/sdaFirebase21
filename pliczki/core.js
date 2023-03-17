@@ -2,6 +2,6 @@ export function isEmpty(obj) {
     return !obj;
 }
 
-export function srodek() {
+export function pokazAlert() {
         alert("Siemanko");
 }

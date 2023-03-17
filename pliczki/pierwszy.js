@@ -1,8 +1,8 @@
 import { bodySelector } from "./const.js";
 import { isEmpty as ArrayEmpty} from "./utils.js";
 import { isEmpty as isObjectEmpty } from "./core.js";
-import { srodek } from "./core.js";
 import { button } from "./const.js";
+import { pokazAlert } from "./core.js";
 
 
 // console.log("Test 1, 2, 3");
@@ -10,4 +10,4 @@ import { button } from "./const.js";
 // console.log(ArrayEmpty([]));
 // console.log(isObjectEmpty([]));
 
-button.addEventListener('click', srodek);
+button.addEventListener('click', pokazAlert);
