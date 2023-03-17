@@ -1,3 +1,5 @@
+import { buttonTag } from "./const.js";
+
 export function isEmpty(arr) {
     return !arr || arr.length === 0;
 }
@@ -9,9 +11,8 @@ export function isEmpty(arr) {
 //     return true;
 // }
 
-import { buttonTag } from "./const";
 export function createButton() {
-    const button = document.createElement();
+    const button = document.createElement(buttonTag);
     document.body.appendChild(button);
     button.innerText = "Klik";
     return button;
