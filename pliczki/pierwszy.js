@@ -1,6 +1,8 @@
 import { bodySelector } from "./const.js";
-import { isEmpty } from "./utils.js";
+import { isEmpty as ArrayEmpty} from "./utils.js";
+import { isEmpty as isObjectEmpty } from "./core.js";
 
 // console.log("Test 1, 2, 3");
 // console.log(bodySelector);
-console.log(isEmpty([]));
+// console.log(ArrayEmpty([]));
+console.log(isObjectEmpty([]));
