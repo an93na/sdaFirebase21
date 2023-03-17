@@ -1,1 +1,1 @@
-export const bodyTag = 'body';
+export const bodySelector = 'body';
