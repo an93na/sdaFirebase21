@@ -8,3 +8,11 @@ export function isEmpty(arr) {
 //     }
 //     return true;
 // }
+
+import { buttonTag } from "./const";
+export function createButton() {
+    const button = document.createElement();
+    document.body.appendChild(button);
+    button.innerText = "Klik";
+    return button;
+}
