@@ -19,3 +19,7 @@ const storage = getStorage(app);
 
 const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af";
 
+const obrazek = document.createElement("img");
+// obrazek.src = url; ---to samo co pod spodem tylko skórcona wersja
+obrazek.setAttribute("src", url);
+document.body.appendChild(obrazek);
