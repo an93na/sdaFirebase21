@@ -4,4 +4,5 @@ export function isEmpty(obj) {
 
 export function pokazAlert() {
         alert("Siemanko");
+        console.log("kliknięto na przycisk")
 }
