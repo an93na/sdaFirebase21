@@ -4,8 +4,10 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "start": "webpack serve --mode development",
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production"
+    },
   "author": "",
   "license": "ISC",
   "devDependencies": {
