@@ -1,7 +1,7 @@
 import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -100,3 +100,12 @@ console.log("Sukces!");
 headerInfo.innerText = "Przesłano!"
  })
 });
+
+const imageRef = ref(storage,'1.jpg');
+getDownloadURL(imageRef).then(url => {
+    const img = document.createElement("img");
+    img.src = url;
+    img.style.width = '200px'
+    // img.style.height = '120px'
+    document.body.appendChild(img);
+ })
