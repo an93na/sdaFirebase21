@@ -101,11 +101,32 @@ headerInfo.innerText = "Przesłano!"
  })
 });
 
-const imageRef = ref(storage,'1.jpg');
-getDownloadURL(imageRef).then(url => {
+
+
+
+const inputFileDodaj = document.createElement('input');
+const buttonDodaj = document.createElement('button');
+inputFileDodaj.setAttribute('type', 'text');
+inputFileDodaj.setAttribute('id', 'inputDodaj');
+buttonDodaj.setAttribute('id', 'buttonDodaj');
+buttonDodaj.innerText= 'pobierz zdjęcie';
+
+document.body.appendChild(inputFileDodaj);
+document.body.appendChild(buttonDodaj);
+
+const poleTekst = document.getElementById('inputDodaj');
+
+document.getElementById('buttonDodaj').addEventListener('click', () => {
+  
+  const imageRef = ref(storage,poleTekst.value);
+  getDownloadURL(imageRef).then(url => {
     const img = document.createElement("img");
     img.src = url;
     img.style.width = '200px'
     // img.style.height = '120px'
     document.body.appendChild(img);
+ }).catch(ex => {
+  headerInfo.innerText = "Nie znaleziono wybranego pliku!"
  })
+})
+
