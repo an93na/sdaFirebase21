@@ -1,7 +1,7 @@
 import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/storage";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -17,23 +17,23 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Storage
 const storage = getStorage(app);
 
-const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af";
+// const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af";
 
-const obrazek = document.createElement("img");
-// obrazek.src = url; ---to samo co pod spodem tylko skórcona wersja
-obrazek.setAttribute("src", url);
-document.body.appendChild(obrazek);
+// const obrazek = document.createElement("img");
+// // obrazek.src = url; ---to samo co pod spodem tylko skórcona wersja
+// obrazek.setAttribute("src", url);
+// document.body.appendChild(obrazek);
 
 
-// przykład funkcji callback
-function myFunction(callback) {
-  callback("MÓJ ARGUMENT!");
-}
+// // przykład funkcji callback
+// function myFunction(callback) {
+//   callback("MÓJ ARGUMENT!");
+// }
 
-function callback(arg) {
-  console.log(arg)
-}
-myFunction(callback);
+// function callback(arg) {
+//   console.log(arg)
+// }
+// myFunction(callback);
 
 // const arrJson = fetch().then((arr) => arr.json());
 // arrJson.then((data) => console.log(data));
@@ -45,11 +45,11 @@ myFunction(callback);
 // }
 // mojaAynchronicznaFunkcja();
 
-const adresUrl = 'https://reqres.in/api/users'
+// const adresUrl = 'https://reqres.in/api/users'
 
-fetch(adresUrl)
-.then(daneZPromisa => daneZPromisa.json())
-.then(daneZJson => console.log(daneZJson.data));
+// fetch(adresUrl)
+// .then(daneZPromisa => daneZPromisa.json())
+// .then(daneZJson => console.log(daneZJson.data));
 
 // async function myFunctionAsynchroniczna() {
 //   const arg = await fetch(adresUrl);
@@ -57,3 +57,25 @@ fetch(adresUrl)
 //   console.log(newdata.data);
 // }
 // myFunctionAsynchroniczna()
+
+//Zapisywanie pliku
+const inputFile = document.createElement('input');
+const button = document.createElement('button');
+inputFile.setAttribute('type', 'file');
+inputFile.setAttribute('id', 'myFile');
+button.setAttribute('id', 'myButton');
+button.innerText = "Kliknij Proszę :)"
+document.body.appendChild(inputFile);
+document.body.appendChild(button);
+
+document.getElementById('myButton').addEventListener('click', () => {
+const file = document.getElementById("myFile").files[0];
+const imageRef = ref(storage, "imageNew.jpg");
+uploadBytes(imageRef, file).then(() => {
+console.log("Sukces!");
+ })
+});
+
+
+
+
