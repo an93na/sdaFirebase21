@@ -98,35 +98,48 @@ uploadBytes(imageRef, file).then(() => {
 console.log("Sukces!");
 
 headerInfo.innerText = "Przesłano!"
+
+  getDownloadURL(imageRef).then(url => {
+    img.src = url;
+    img.style.width = '200px'
+    // img.style.height = '120px'
+    document.body.appendChild(img);
+    
+ })
  })
 });
 
 
 
 
-const inputFileDodaj = document.createElement('input');
-const buttonDodaj = document.createElement('button');
-inputFileDodaj.setAttribute('type', 'text');
-inputFileDodaj.setAttribute('id', 'inputDodaj');
-buttonDodaj.setAttribute('id', 'buttonDodaj');
-buttonDodaj.innerText= 'pobierz zdjęcie';
+// const inputFileDodaj = document.createElement('input');
+// const buttonDodaj = document.createElement('button');
+const img = document.createElement("img");
 
-document.body.appendChild(inputFileDodaj);
-document.body.appendChild(buttonDodaj);
+// inputFileDodaj.setAttribute('type', 'text');
+// inputFileDodaj.setAttribute('id', 'inputDodaj');
+// buttonDodaj.setAttribute('id', 'buttonDodaj');
+// buttonDodaj.innerText= 'pobierz zdjęcie';
 
-const poleTekst = document.getElementById('inputDodaj');
+// document.body.appendChild(inputFileDodaj);
+// document.body.appendChild(buttonDodaj);
 
-document.getElementById('buttonDodaj').addEventListener('click', () => {
+
+// const poleTekst = document.getElementById('inputDodaj');
+
+// document.getElementById('buttonDodaj').addEventListener('click', () => {
+//   const imageRef = ref(storage,poleTekst.value);
+
+//   headerInfo.innerText = "";
   
-  const imageRef = ref(storage,poleTekst.value);
-  getDownloadURL(imageRef).then(url => {
-    const img = document.createElement("img");
-    img.src = url;
-    img.style.width = '200px'
-    // img.style.height = '120px'
-    document.body.appendChild(img);
- }).catch(ex => {
-  headerInfo.innerText = "Nie znaleziono wybranego pliku!"
- })
-})
+//   getDownloadURL(imageRef).then(url => {
+//     img.src = url;
+//     img.style.width = '200px'
+//     // img.style.height = '120px'
+//     document.body.appendChild(img);
+    
+//  }).catch(ex => {
+//   headerInfo.innerText = "Nie znaleziono wybranego pliku!"
+//  })
+// })
 
