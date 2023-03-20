@@ -23,3 +23,14 @@ const obrazek = document.createElement("img");
 // obrazek.src = url; ---to samo co pod spodem tylko skórcona wersja
 obrazek.setAttribute("src", url);
 document.body.appendChild(obrazek);
+
+
+// przykład funkcji callback
+function myFunction(callback) {
+  callback("MÓJ ARGUMENT!");
+}
+
+function callback(arg) {
+  console.log(arg)
+}
+myFunction(callback);
