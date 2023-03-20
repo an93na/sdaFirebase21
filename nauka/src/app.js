@@ -34,3 +34,19 @@ function callback(arg) {
   console.log(arg)
 }
 myFunction(callback);
+
+// const arrJson = fetch().then((arr) => arr.json());
+// arrJson.then((data) => console.log(data));
+
+// async function mojaAynchronicznaFunkcja() {
+//   const arr = await fetch();
+//   const data = await arr.json();
+//   console.log(data)
+// }
+
+// mojaAynchronicznaFunkcja();
+
+const adresUrl = 'https://reqres.in/api/users'
+fetch(adresUrl)
+.then(daneZPromisa => daneZPromisa.json())
+.then(daneZJson => console.log(daneZJson.data))
