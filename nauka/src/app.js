@@ -69,21 +69,20 @@ button.setAttribute('id', 'myButton');
 button.innerText = "Kliknij Proszę :)";
 header.setAttribute('id', 'myHeader');
 
-header.innerText = ""
-
 document.body.appendChild(inputFile);
 document.body.appendChild(button);
 document.body.appendChild(header);
 
+const headerInfo = document.getElementById("myHeader")
 document.getElementById('myButton').addEventListener('click', () => {
 const file = document.getElementById("myFile").files[0];
 const imageRef = ref(storage, "imageNew.jpg");
 
-header.innerText = "Przesyłam ..."
+headerInfo.innerText = "Przesyłam ..."
 
 uploadBytes(imageRef, file).then(() => {
 console.log("Sukces!");
 
-header.innerText = "Przesłano!"
+headerInfo.innerText = "Przesłano!"
  })
 });
