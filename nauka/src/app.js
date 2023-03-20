@@ -43,10 +43,17 @@ myFunction(callback);
 //   const data = await arr.json();
 //   console.log(data)
 // }
-
 // mojaAynchronicznaFunkcja();
 
 const adresUrl = 'https://reqres.in/api/users'
+
 fetch(adresUrl)
 .then(daneZPromisa => daneZPromisa.json())
-.then(daneZJson => console.log(daneZJson.data))
+.then(daneZJson => console.log(daneZJson.data));
+
+// async function myFunctionAsynchroniczna() {
+//   const arg = await fetch(adresUrl);
+//   const newdata = await arg.json();
+//   console.log(newdata.data);
+// }
+// myFunctionAsynchroniczna()
