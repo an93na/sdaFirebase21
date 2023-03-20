@@ -60,23 +60,37 @@ const storage = getStorage(app);
 
 //Zapisywanie pliku
 const inputFile = document.createElement('input');
+const inputTekst = document.createElement('input');
 const button = document.createElement('button');
 const header = document.createElement ('h1');
 
 inputFile.setAttribute('type', 'file');
 inputFile.setAttribute('id', 'myFile');
+
+inputTekst.setAttribute('type', 'text');
+inputTekst.setAttribute('id', 'myFileText');
+
 button.setAttribute('id', 'myButton');
 button.innerText = "Kliknij Proszę :)";
 header.setAttribute('id', 'myHeader');
 
 document.body.appendChild(inputFile);
+document.body.appendChild(inputTekst);
 document.body.appendChild(button);
 document.body.appendChild(header);
 
+
 const headerInfo = document.getElementById("myHeader")
+const tekstInput = document.getElementById('myFileText')
 document.getElementById('myButton').addEventListener('click', () => {
 const file = document.getElementById("myFile").files[0];
-const imageRef = ref(storage, file.name);
+
+let fileName = file.name
+
+if(tekstInput.value){
+  fileName = tekstInput.value;
+}
+const imageRef = ref(storage, fileName);
 
 headerInfo.innerText = "Przesyłam ..."
 
