@@ -76,7 +76,7 @@ document.body.appendChild(header);
 const headerInfo = document.getElementById("myHeader")
 document.getElementById('myButton').addEventListener('click', () => {
 const file = document.getElementById("myFile").files[0];
-const imageRef = ref(storage, "imageNew.jpg");
+const imageRef = ref(storage, file.name);
 
 headerInfo.innerText = "Przesyłam ..."
 
