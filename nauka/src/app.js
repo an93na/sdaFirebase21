@@ -61,21 +61,29 @@ const storage = getStorage(app);
 //Zapisywanie pliku
 const inputFile = document.createElement('input');
 const button = document.createElement('button');
+const header = document.createElement ('h1');
+
 inputFile.setAttribute('type', 'file');
 inputFile.setAttribute('id', 'myFile');
 button.setAttribute('id', 'myButton');
-button.innerText = "Kliknij Proszę :)"
+button.innerText = "Kliknij Proszę :)";
+header.setAttribute('id', 'myHeader');
+
+header.innerText = ""
+
 document.body.appendChild(inputFile);
 document.body.appendChild(button);
+document.body.appendChild(header);
 
 document.getElementById('myButton').addEventListener('click', () => {
 const file = document.getElementById("myFile").files[0];
 const imageRef = ref(storage, "imageNew.jpg");
+
+header.innerText = "Przesyłam ..."
+
 uploadBytes(imageRef, file).then(() => {
 console.log("Sukces!");
+
+header.innerText = "Przesłano!"
  })
 });
-
-
-
-
