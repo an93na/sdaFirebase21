@@ -1,7 +1,8 @@
 import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -59,62 +60,60 @@ const storage = getStorage(app);
 // myFunctionAsynchroniczna()
 
 //Zapisywanie pliku
-const inputFile = document.createElement('input');
-const inputTekst = document.createElement('input');
-const button = document.createElement('button');
-const header = document.createElement ('h1');
+// const inputFile = document.createElement('input');
+// const inputTekst = document.createElement('input');
+// const button = document.createElement('button');
+// const header = document.createElement ('h1');
 
-inputFile.setAttribute('type', 'file');
-inputFile.setAttribute('id', 'myFile');
+// inputFile.setAttribute('type', 'file');
+// inputFile.setAttribute('id', 'myFile');
 
-inputTekst.setAttribute('type', 'text');
-inputTekst.setAttribute('id', 'myFileText');
+// inputTekst.setAttribute('type', 'text');
+// inputTekst.setAttribute('id', 'myFileText');
 
-button.setAttribute('id', 'myButton');
-button.innerText = "Kliknij Proszę :)";
-header.setAttribute('id', 'myHeader');
+// button.setAttribute('id', 'myButton');
+// button.innerText = "Kliknij Proszę :)";
+// header.setAttribute('id', 'myHeader');
 
-document.body.appendChild(inputFile);
-document.body.appendChild(inputTekst);
-document.body.appendChild(button);
-document.body.appendChild(header);
+// document.body.appendChild(inputFile);
+// document.body.appendChild(inputTekst);
+// document.body.appendChild(button);
+// document.body.appendChild(header);
 
 
-const headerInfo = document.getElementById("myHeader")
-const tekstInput = document.getElementById('myFileText')
-document.getElementById('myButton').addEventListener('click', () => {
-const file = document.getElementById("myFile").files[0];
+// const headerInfo = document.getElementById("myHeader")
+// const tekstInput = document.getElementById('myFileText')
+// document.getElementById('myButton').addEventListener('click', () => {
+// const file = document.getElementById("myFile").files[0];
 
-let fileName = file.name
+// let fileName = file.name
 
-if(tekstInput.value){
-  fileName = tekstInput.value;
-}
-const imageRef = ref(storage, fileName);
+// if(tekstInput.value){
+//   fileName = tekstInput.value;
+// }
+// const imageRef = ref(storage, fileName);
 
-headerInfo.innerText = "Przesyłam ..."
+// headerInfo.innerText = "Przesyłam ..."
 
-uploadBytes(imageRef, file).then(() => {
-console.log("Sukces!");
+// uploadBytes(imageRef, file).then(() => {
+// console.log("Sukces!");
 
-headerInfo.innerText = "Przesłano!"
+// headerInfo.innerText = "Przesłano!"
 
-  getDownloadURL(imageRef).then(url => {
-    img.src = url;
-    img.style.width = '200px'
-    // img.style.height = '120px'
-    document.body.appendChild(img);
+//   getDownloadURL(imageRef).then(url => {
+//     img.src = url;
+//     img.style.width = '200px'
+//     // img.style.height = '120px'
+//     document.body.appendChild(img);
     
- })
- })
-});
-
-
+//  })
+//  })
+// });
 
 
 // const inputFileDodaj = document.createElement('input');
 // const buttonDodaj = document.createElement('button');
-const img = document.createElement("img");
+// const img = document.createElement("img");
 
 // inputFileDodaj.setAttribute('type', 'text');
 // inputFileDodaj.setAttribute('id', 'inputDodaj');
@@ -143,3 +142,11 @@ const img = document.createElement("img");
 //  })
 // })
 
+//Listowanie plików
+const storageRef = ref(storage);
+listAll(storageRef).then((res) => {
+  // console.log(res.items)
+ res.items.forEach(item => {
+ console.log(item.name);
+ })
+})
