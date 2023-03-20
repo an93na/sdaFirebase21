@@ -142,11 +142,29 @@ const storage = getStorage(app);
 //  })
 // })
 
-//Listowanie plików
+//Listowanie plików w consoli
+// const storageRef = ref(storage);
+// listAll(storageRef).then((res) => {
+//   // console.log(res.items)
+//  res.items.forEach(item => {
+//  console.log(item.name);
+//  })
+// })
+
+//Lista numerowana na stronie z nazwami plików
+const ol = document.createElement('ol');
+ol.setAttribute('id', 'listaNumerowana');
+document.body.appendChild(ol);
+
 const storageRef = ref(storage);
 listAll(storageRef).then((res) => {
-  // console.log(res.items)
- res.items.forEach(item => {
- console.log(item.name);
+  document.getElementById('listaNumerowana');
+  res.items.forEach(item => {
+  let li = document.createElement('li');
+    li.innerText = item.name
+    ol.appendChild(li);
  })
 })
+
+
+
