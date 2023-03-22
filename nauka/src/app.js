@@ -161,10 +161,13 @@ listAll(storageRef).then((res) => {
   document.getElementById('listaNumerowana');
   res.items.forEach(item => {
   let li = document.createElement('li');
+  const buttonShowFoto = document.createElement('button');
+  buttonShowFoto.innerText = 'pokaz zdjecie'
+  buttonShowFoto.setAttribute('id', 'showFoto');
     li.innerText = item.name
     ol.appendChild(li);
+    li.appendChild(buttonShowFoto);
  })
 })
-
 
 
