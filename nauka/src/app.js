@@ -185,7 +185,7 @@ listAll(storageRef).then((res) => {
         console.log("Usunięto");
         setTimeout(() => {
           location.reload()
-        }, 200); ;
+        }, 500); ;
         let dopisek = document.createElement('h2');
         dopisek.innerText = 'usunięto'+ item.name;
         document.body.appendChild(dopisek);
