@@ -183,7 +183,12 @@ listAll(storageRef).then((res) => {
       const imageRef = ref(storage,item.name);
       deleteObject(imageRef).then(() => {
         console.log("Usunięto");
-        location.reload();
+        setTimeout(() => {
+          location.reload()
+        }, 200); ;
+        let dopisek = document.createElement('h2');
+        dopisek.innerText = 'usunięto'+ item.name;
+        document.body.appendChild(dopisek);
        })
   }
 )
