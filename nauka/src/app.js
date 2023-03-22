@@ -1,7 +1,7 @@
 import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
-import { getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 
 
 const firebaseConfig = {
@@ -163,13 +163,15 @@ listAll(storageRef).then((res) => {
   res.items.forEach(item => {
     const li = document.createElement('li');
     const buttonShowFoto = document.createElement('button');
+    const delateFoto = document.createElement('button');
+  
 
     buttonShowFoto.addEventListener('click', () => {
     // console.log(item.name)
     const imageRef = ref(storage,item.name);
     // console.log(imageRef);
     getDownloadURL(imageRef).then(url => {
-        console.log(url);
+        // console.log(url);
         fotka.src = url;
         fotka.style.width = '200px'
         document.body.appendChild(fotka);
@@ -177,11 +179,22 @@ listAll(storageRef).then((res) => {
        })
   });
 
+    delateFoto.addEventListener('click', () => {
+      const imageRef = ref(storage,item.name);
+      deleteObject(imageRef).then(() => {
+        console.log("Usunięto");
+        
+       })
+  }
+)
+
     buttonShowFoto.innerText = 'pokaz zdjecie';
+    delateFoto.innerText = 'usuń zdjecie';
     li.innerText = item.name;
 
     ol.appendChild(li);
     li.appendChild(buttonShowFoto);
+    li.appendChild(delateFoto);
  })
 })
 
