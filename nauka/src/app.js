@@ -155,6 +155,7 @@ const storage = getStorage(app);
 const ol = document.createElement('ol');
 ol.setAttribute('id', 'listaNumerowana');
 document.body.appendChild(ol);
+const fotka = document.createElement('img');
 
 const storageRef = ref(storage);
 listAll(storageRef).then((res) => {
@@ -163,7 +164,11 @@ listAll(storageRef).then((res) => {
     const li = document.createElement('li');
     const buttonShowFoto = document.createElement('button');
 
-    buttonShowFoto.addEventListener('click', () => console.log('siemka'));
+    buttonShowFoto.addEventListener('click', () => {
+    // console.log(item.name)
+    const imageRef = ref(storage,item.name);
+    console.log(imageRef);
+  });
 
     buttonShowFoto.innerText = 'pokaz zdjecie';
     li.innerText = item.name;
