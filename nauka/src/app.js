@@ -167,7 +167,14 @@ listAll(storageRef).then((res) => {
     buttonShowFoto.addEventListener('click', () => {
     // console.log(item.name)
     const imageRef = ref(storage,item.name);
-    console.log(imageRef);
+    // console.log(imageRef);
+    getDownloadURL(imageRef).then(url => {
+        console.log(url);
+        fotka.src = url;
+        fotka.style.width = '200px'
+        document.body.appendChild(fotka);
+          
+       })
   });
 
     buttonShowFoto.innerText = 'pokaz zdjecie';
