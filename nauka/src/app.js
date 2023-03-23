@@ -222,7 +222,12 @@ listAll(storageRef).then((res) => {
         img.src = url;
         img.style.width = '200px'
         li.appendChild(img);
-          
+        img.style.padding = '10px';
+        img.style.margin = '10px';
+        li.style.textAlign = 'center'
+        li.style.padding = '5px'
+        li.style.margin = '5px'
+        
        })
 
     li.innerText = item.name;
