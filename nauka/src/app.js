@@ -204,3 +204,6 @@ listAll(storageRef).then((res) => {
 })
 
 
+// Utwórz aplikację, która wyświetli wszystkie obrazki dostępne w Storage wraz z ich nazwami.
+
+
