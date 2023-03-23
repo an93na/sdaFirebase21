@@ -219,7 +219,8 @@ listAll(storageRef).then((res) => {
   res.items.forEach(item => {
     const div = document.createElement('div');
     const buttonDel = document.createElement('button');
-    buttonDel.innerText = 'usuń obrazek' 
+    buttonDel.innerText = 'usuń obrazek'
+    buttonDel.style.cursor = 'pointer' 
 
     listaZobrazkami.style.display = 'flex';        
     listaZobrazkami.style.flexWrap = 'wrap';  
