@@ -251,8 +251,11 @@ listAll(storageRef).then((res) => {
         const imageRef = ref(storage,item.name);
         deleteObject(imageRef).then(() => {
         listaZobrazkami.removeChild(div);
-        
-        dopisek.innerText = 'usunięto '+ item.name;
+        dopisek.innerText = 'usunięto '+ item.name
+        setTimeout(() => {
+          dopisek.innerText = '';
+        }, 1000);
+        ;
        })
       });
 
