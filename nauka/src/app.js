@@ -224,10 +224,13 @@ listAll(storageRef).then((res) => {
         li.appendChild(img);
         img.style.padding = '10px';
         img.style.margin = '10px';
-        li.style.textAlign = 'center'
-        li.style.padding = '5px'
-        li.style.margin = '5px'
-        
+        // li.style.textAlign = 'center';
+        li.style.padding = '5px';
+        li.style.margin = '5px';
+        listaZobrazkami.style.listStyleType = 'none';
+        img.style.display = 'flex';
+        img.style.boxSizing = 'border-box'
+
        })
 
     li.innerText = item.name;
