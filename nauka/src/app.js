@@ -159,6 +159,7 @@ const fotka = document.createElement('img');
 
 const storageRef = ref(storage);
 listAll(storageRef).then((res) => {
+  
   document.getElementById('listaNumerowana');
   res.items.forEach(item => {
     const li = document.createElement('li');
@@ -174,7 +175,7 @@ listAll(storageRef).then((res) => {
         // console.log(url);
         fotka.src = url;
         fotka.style.width = '200px'
-        document.body.appendChild(fotka);
+        ol.appendChild(fotka);
           
        })
   });
@@ -214,6 +215,16 @@ listAll(storageRef).then((res) => {
   document.getElementById('listaObrazki');
   res.items.forEach(item => {
     const div = document.createElement('div');
+
+    listaZobrazkami.style.display = 'flex';        
+    listaZobrazkami.style.flexWrap = 'wrap';  
+    
+    div.style.display = 'flex';
+    div.style.flexDirection = 'column';
+    div.style.alignItems = 'center';
+    div.style.padding = '10px';
+    div.style.marginTop = '10px';
+
     const imageRef = ref(storage,item.name);
   
     getDownloadURL(imageRef).then(url => {
@@ -224,22 +235,13 @@ listAll(storageRef).then((res) => {
         div.appendChild(img);
         img.style.padding = '10px';
         img.style.margin = '10px';
-        // li.style.textAlign = 'center';
-        div.style.padding = '10px';
-        div.style.marginTop = '10px';
-        div.style.textAlign = 'centre'
-        listaZobrazkami.style.display = 'flex';        
-        listaZobrazkami.style.flexWrap = 'wrap';        
-
-        img.style.boxSizing = 'border-box'
+        img.style.boxSizing = 'border-box';
 
        })
 
     div.innerText = item.name;
     listaZobrazkami.appendChild(div);
     
-  });
-    
-    
+  })
     })
 
