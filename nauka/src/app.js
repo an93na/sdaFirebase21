@@ -206,4 +206,30 @@ listAll(storageRef).then((res) => {
 
 // Utwórz aplikację, która wyświetli wszystkie obrazki dostępne w Storage wraz z ich nazwami.
 
+const listaZobrazkami = document.createElement('ul');
+listaZobrazkami.setAttribute('class', 'listaObrazki');
+document.body.appendChild(listaZobrazkami);
+
+listAll(storageRef).then((res) => {
+  document.getElementById('listaObrazki');
+  res.items.forEach(item => {
+    const li = document.createElement('li');
+    const imageRef = ref(storage,item.name);
+  
+    getDownloadURL(imageRef).then(url => {
+      const img = document.createElement('img');  
+      // console.log(url);
+        img.src = url;
+        img.style.width = '200px'
+        li.appendChild(img);
+          
+       })
+
+    li.innerText = item.name;
+    listaZobrazkami.appendChild(li);
+    
+  });
+    
+    
+    })
 
