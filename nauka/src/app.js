@@ -208,13 +208,18 @@ listAll(storageRef).then((res) => {
 // Utwórz aplikację, która wyświetli wszystkie obrazki dostępne w Storage wraz z ich nazwami.
 
 const listaZobrazkami = document.createElement('div');
+let dopisek = document.createElement('h2');
 listaZobrazkami.setAttribute('class', 'listaObrazki');
 document.body.appendChild(listaZobrazkami);
+listaZobrazkami.appendChild(dopisek);
+dopisek.innerText = '';
 
 listAll(storageRef).then((res) => {
   document.getElementById('listaObrazki');
   res.items.forEach(item => {
     const div = document.createElement('div');
+    const buttonDel = document.createElement('button');
+    buttonDel.innerText = 'usuń obrazek' 
 
     listaZobrazkami.style.display = 'flex';        
     listaZobrazkami.style.flexWrap = 'wrap';  
@@ -228,16 +233,31 @@ listAll(storageRef).then((res) => {
     const imageRef = ref(storage,item.name);
   
     getDownloadURL(imageRef).then(url => {
-      const img = document.createElement('img');  
+      const img = document.createElement('img');
+      
       // console.log(url);
         img.src = url;
         img.style.width = '200px'
         div.appendChild(img);
+        div.appendChild(buttonDel);
         img.style.padding = '10px';
         img.style.margin = '10px';
         img.style.boxSizing = 'border-box';
 
        })
+
+       buttonDel.addEventListener('click', () => {
+        
+        const imageRef = ref(storage,item.name);
+        deleteObject(imageRef).then(() => {
+        listaZobrazkami.removeChild(div);
+        
+        dopisek.innerText = 'usunięto '+ item.name;
+       })
+      });
+
+      
+   
 
     div.innerText = item.name;
     listaZobrazkami.appendChild(div);
