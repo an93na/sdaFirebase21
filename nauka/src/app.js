@@ -274,7 +274,20 @@ listAll(storageRef).then((res) => {
 
 const inputFile2 = document.createElement('input');
 const inputTekst2 = document.createElement('input');
-const button = document.createElement('button');
+const button2 = document.createElement('button');
 
 inputFile2.setAttribute('type', 'file');
 inputFile2.setAttribute('id', 'myFile2'); 
+
+inputTekst2.setAttribute('type', 'text');
+inputTekst2.setAttribute('id', 'myFileText2');
+
+button2.setAttribute('id', 'myButt');
+button2.innerText= 'dodaj';
+
+document.body.appendChild(inputFile2);
+document.body.appendChild(inputTekst2);
+document.body.appendChild(button2);
+
+
+
