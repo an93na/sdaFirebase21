@@ -292,6 +292,10 @@ const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot
 
 document.getElementById('myButt').addEventListener('click', ()=> {
   const file = document.getElementById('myFile2').files[0];
+  
   let fileName = file.name;
+  let folder1 = 'Kategoria1'
+  
+  const imageRef = ref(storage, folder1/fileName);
 })
 
