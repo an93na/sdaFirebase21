@@ -288,6 +288,10 @@ button2.innerText= 'dodaj';
 document.body.appendChild(inputFile2);
 document.body.appendChild(inputTekst2);
 document.body.appendChild(button2);
+const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af"
 
-
+document.getElementById('myButt').addEventListener('click', ()=> {
+  const file = document.getElementById('myFile2').files[0];
+  let fileName = file.name;
+})
 
