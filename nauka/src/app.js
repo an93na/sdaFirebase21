@@ -274,7 +274,10 @@ listAll(storageRef).then((res) => {
 
 const inputFile2 = document.createElement('input');
 const inputTekst2 = document.createElement('input');
+const button1 = document.createElement('button');
 const button2 = document.createElement('button');
+const button3 = document.createElement('button');
+const button4 = document.createElement('button');
 
 inputFile2.setAttribute('type', 'file');
 inputFile2.setAttribute('id', 'myFile2'); 
@@ -282,21 +285,38 @@ inputFile2.setAttribute('id', 'myFile2');
 inputTekst2.setAttribute('type', 'text');
 inputTekst2.setAttribute('id', 'myFileText2');
 
-button2.setAttribute('id', 'myButt');
-button2.innerText= 'dodaj';
+button1.setAttribute('id', 'myButt');
+button1.innerText= 'dodaj do K1';
+
+button2.setAttribute('id', 'myButt2');
+button2.innerText= 'dodaj do K2';
+
+button3.setAttribute('id', 'myButt3');
+button3.innerText= 'dodaj do K3';
+
+button4.setAttribute('id', 'myButt4');
+button4.innerText= 'dodaj do K4';
 
 document.body.appendChild(inputFile2);
 document.body.appendChild(inputTekst2);
+document.body.appendChild(button1);
 document.body.appendChild(button2);
+document.body.appendChild(button3);
+document.body.appendChild(button4);
+
 const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af"
 
 document.getElementById('myButt').addEventListener('click', ()=> {
   const file = document.getElementById('myFile2').files[0];
-  
+  const tekstInput = document.getElementById('myFileText2');
+
   let fileName = file.name;
   let folderName = 'Kategoria1'
   let filePath1 = folderName + '/' + fileName;
 
+  if(tekstInput.value){
+  fileName = tekstInput.value;
+  }
   const imageRef = ref(storage, filePath1);
 
   uploadBytes(imageRef, file).then((uploadResult) => {
