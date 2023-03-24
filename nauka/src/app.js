@@ -318,11 +318,30 @@ document.getElementById('myButt').addEventListener('click', ()=> {
   fileName = tekstInput.value;
   }
   let filePath1 = folderName + '/' + fileName;
+
+  const imageRef = ref(storage, filePath1);
+
+  uploadBytes(imageRef, file).then((uploadResult) => {
+    console.log("Sukces!");
+    })
+});
+
+document.getElementById('myButt2').addEventListener('click', ()=> {
+  const file = document.getElementById('myFile2').files[0];
+  const tekstInput = document.getElementById('myFileText2');
+  
+  let fileName = file.name;
+  let folderName = 'Kategoria2'
+
+  if(tekstInput.value){
+  fileName = tekstInput.value;
+  }
+  let filePath1 = folderName + '/' + fileName;
   
   const imageRef = ref(storage, filePath1);
 
   uploadBytes(imageRef, file).then((uploadResult) => {
     console.log("Sukces!");
     })
-})
+});
 
