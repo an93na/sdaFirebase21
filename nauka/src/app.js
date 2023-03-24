@@ -309,14 +309,16 @@ const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot
 document.getElementById('myButt').addEventListener('click', ()=> {
   const file = document.getElementById('myFile2').files[0];
   const tekstInput = document.getElementById('myFileText2');
-
+  
   let fileName = file.name;
   let folderName = 'Kategoria1'
-  let filePath1 = folderName + '/' + fileName;
+  
 
   if(tekstInput.value){
   fileName = tekstInput.value;
   }
+  let filePath1 = folderName + '/' + fileName;
+  
   const imageRef = ref(storage, filePath1);
 
   uploadBytes(imageRef, file).then((uploadResult) => {
