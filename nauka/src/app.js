@@ -331,17 +331,50 @@ document.getElementById('myButt2').addEventListener('click', ()=> {
   const tekstInput = document.getElementById('myFileText2');
   
   let fileName = file.name;
-  let folderName = 'Kategoria2'
+  let folderName = 'Kategoria2';
 
   if(tekstInput.value){
   fileName = tekstInput.value;
   }
-  let filePath1 = folderName + '/' + fileName;
+  let filePath2 = folderName + '/' + fileName;
   
-  const imageRef = ref(storage, filePath1);
+  const imageRef = ref(storage, filePath2);
 
   uploadBytes(imageRef, file).then((uploadResult) => {
     console.log("Sukces!");
     })
 });
 
+document.getElementById("myButt3").addEventListener('click', () => {
+  const file = document.getElementById('myFile2').files[0];
+  const tekstInput = document.getElementById('myFileText2');
+  let fileName = file.name;
+  let folderName = 'Kategoria3';
+
+  if(tekstInput.value){
+    fileName = tekstInput.value;
+  } 
+  let filePath3 = folderName + '/' + fileName;
+  const imageRef = ref(storage, filePath3);
+
+  uploadBytes(imageRef, file).then((uploadResult) => {
+    console.log('Sukces!')
+  })
+})
+
+document.getElementById("myButt4").addEventListener('click', () => {
+  const file = document.getElementById('myFile2').files[0];
+  const tekstInput = document.getElementById('myFileText2');
+  let fileName = file.name;
+  let folderName = 'Kategoria4';
+
+  if(tekstInput.value){
+    fileName = tekstInput.value;
+  } 
+  let filePath4 = folderName + '/' + fileName;
+  const imageRef = ref(storage, filePath4);
+
+  uploadBytes(imageRef, file).then((uploadResult) => {
+    console.log('Sukces!')
+  })
+})
