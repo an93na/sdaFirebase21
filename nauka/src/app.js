@@ -269,3 +269,12 @@ listAll(storageRef).then((res) => {
   })
     })
 
+
+//zad7
+
+const inputFile2 = document.createElement('input');
+const inputTekst2 = document.createElement('input');
+const button = document.createElement('button');
+
+inputFile2.setAttribute('type', 'file');
+inputFile2.setAttribute('id', 'myFile2'); 
