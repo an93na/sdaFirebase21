@@ -294,8 +294,13 @@ document.getElementById('myButt').addEventListener('click', ()=> {
   const file = document.getElementById('myFile2').files[0];
   
   let fileName = file.name;
-  let folder1 = 'Kategoria1'
-  
-  const imageRef = ref(storage, folder1/fileName);
+  let folderName = 'Kategoria1'
+  let filePath1 = folderName + '/' + fileName;
+
+  const imageRef = ref(storage, filePath1);
+
+  uploadBytes(imageRef, file).then((uploadResult) => {
+    console.log("Sukces!");
+    })
 })
 
