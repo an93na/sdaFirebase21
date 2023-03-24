@@ -271,7 +271,7 @@ listAll(storageRef).then((res) => {
 
 
 //zad7
-
+const headerKat = document.createElement('h1');
 const inputFile2 = document.createElement('input');
 const inputTekst2 = document.createElement('input');
 const button1 = document.createElement('button');
@@ -285,6 +285,8 @@ inputFile2.setAttribute('id', 'myFile2');
 inputTekst2.setAttribute('type', 'text');
 inputTekst2.setAttribute('id', 'myFileText2');
 
+headerKat.innerText = 'Dodawanie pliku do folderu';
+
 button1.setAttribute('id', 'myButt');
 button1.innerText= 'dodaj do K1';
 
@@ -297,6 +299,7 @@ button3.innerText= 'dodaj do K3';
 button4.setAttribute('id', 'myButt4');
 button4.innerText= 'dodaj do K4';
 
+document.body.appendChild(headerKat);
 document.body.appendChild(inputFile2);
 document.body.appendChild(inputTekst2);
 document.body.appendChild(button1);
