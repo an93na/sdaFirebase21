@@ -6,6 +6,8 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import { getStorage, uploadBytes } from "firebase/storage";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
+import {getFirestore} from "firebase/firestore"
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,7 +22,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-
+const db = getFirestore(app);
 
 
 // const url = "https://firebasestorage.googleapis.com/v0/b/moj121frontpol.appspot.com/o/IMG_20201122_101754.jpg?alt=media&token=6cf101bc-283b-4815-a7c2-1cddf9d7c995"
@@ -164,67 +166,68 @@ const storage = getStorage(app);
 //   });
 // });
 
-const albumsList = document.createElement('select')
-albumsList.setAttribute('id', 'myAlbum');
-document.body.appendChild(albumsList);
+// const albumsList = document.createElement('select')
+// albumsList.setAttribute('id', 'myAlbum');
+// document.body.appendChild(albumsList);
 
-let opt1 = document.createElement('option');
-albumsList.appendChild(opt1);
+// let opt1 = document.createElement('option');
+// albumsList.appendChild(opt1);
 
-const inputAlbum = document.createElement('input');
-inputAlbum.setAttribute('type', 'file');
-document.body.appendChild(inputAlbum);
+// const inputAlbum = document.createElement('input');
+// inputAlbum.setAttribute('type', 'file');
+// document.body.appendChild(inputAlbum);
 
-const buttonAlbum = document.createElement('button');
-buttonAlbum.innerText = "Załaduj zdjęcie";
-buttonAlbum.setAttribute('id', 'ZaladujFoto');
-document.body.appendChild(buttonAlbum);
+// const buttonAlbum = document.createElement('button');
+// buttonAlbum.innerText = "Załaduj zdjęcie";
+// buttonAlbum.setAttribute('id', 'ZaladujFoto');
+// document.body.appendChild(buttonAlbum);
 
-const buttonWyswietl = document.createElement('button');
-buttonWyswietl.innerText = "Wyswietl zdjecie";
-buttonWyswietl.setAttribute('id', 'zdjecieZalbumu');
-document.body.appendChild(buttonWyswietl);
+// const buttonWyswietl = document.createElement('button');
+// buttonWyswietl.innerText = "Wyswietl zdjecie";
+// buttonWyswietl.setAttribute('id', 'zdjecieZalbumu');
+// document.body.appendChild(buttonWyswietl);
 
 
-buttonAlbum.addEventListener('click', () => {
-  if(albumsList.value){
-    // console.log(albumsList.value);
-    const file = inputAlbum.files[0];
-    const imageRef = ref(storage, `${albumsList.value}/${file.name}`)
-    uploadBytes(imageRef, file).then((uploadResult) => {
-     console.log('sukces');
-    })}
+// buttonAlbum.addEventListener('click', () => {
+//   if(albumsList.value){
+//     // console.log(albumsList.value);
+//     const file = inputAlbum.files[0];
+//     const imageRef = ref(storage, `${albumsList.value}/${file.name}`)
+//     uploadBytes(imageRef, file).then((uploadResult) => {
+//      console.log('sukces');
+//     })}
   
 
-});
+// });
 
-const img = document.createElement('img');
-buttonWyswietl.addEventListener('click', ()=>{
-    const albumRef = ref(storage, albumsList.value);
-    listAll(albumRef).then(res => {
-      res.items.forEach(item => {
-        const itemRef = ref(storage, item.fullPath);
-        // console.log(itemRef)
-        getDownloadURL(itemRef).then(url => {
-          // console.log(url);
-          img.src = url;
-          img.style.width = '200px'
-          document.body.appendChild(img);
+// const img = document.createElement('img');
+// buttonWyswietl.addEventListener('click', ()=>{
+//     const albumRef = ref(storage, albumsList.value);
+//     listAll(albumRef).then(res => {
+//       res.items.forEach(item => {
+//         const itemRef = ref(storage, item.fullPath);
+//         // console.log(itemRef)
+//         getDownloadURL(itemRef).then(url => {
+//           // console.log(url);
+//           img.src = url;
+//           img.style.width = '200px'
+//           document.body.appendChild(img);
             
-         })
-      })
-    })
-})
+//          })
+//       })
+//     })
+// })
 
-const storageRef = ref(storage);
-listAll(storageRef).then(res => { 
-  res.prefixes.forEach(prefix => {
-    // console.log(prefix.name);
+// const storageRef = ref(storage);
+// listAll(storageRef).then(res => { 
+//   res.prefixes.forEach(prefix => {
+//     // console.log(prefix.name);
     
-    let opt = document.createElement('option');
-    opt.innerText = prefix.name;
-    albumsList.appendChild(opt);
+//     let opt = document.createElement('option');
+//     opt.innerText = prefix.name;
+//     albumsList.appendChild(opt);
 
-  })
+//   })
   
-  });
+//   });
+
