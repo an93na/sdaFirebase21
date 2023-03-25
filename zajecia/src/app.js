@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import { getStorage, uploadBytes } from "firebase/storage";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {addDoc, collection, doc, getDoc, getFirestore, setDoc} from "firebase/firestore"
+import {addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore"
 
 
 // Your web app's Firebase configuration
@@ -286,3 +286,18 @@ buttonDoc.addEventListener('click', () =>{
   age: inputAge.value
 })
 })
+
+const ol = document.createElement('ol');
+ol.setAttribute('id', 'listaUzytkownikow')
+document.body.appendChild(ol);
+
+const usersCollection = collection(db, "users");
+
+getDocs(usersCollection).then(docs => {
+docs.forEach((doc) => {
+  const li = document.createElement('li');
+  const myUser = doc.data();
+  li.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`;
+  ol.appendChild(li);
+})  
+});
