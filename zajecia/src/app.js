@@ -296,8 +296,14 @@ const usersCollection = collection(db, "users");
 getDocs(usersCollection).then(docs => {
 docs.forEach((doc) => {
   const li = document.createElement('li');
+  const button = document.createElement('button');
+
   const myUser = doc.data();
+  
   li.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`;
+  button.innerText = 'edytuj';
+
   ol.appendChild(li);
+  li.appendChild(button);
 })  
 });
