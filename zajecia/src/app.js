@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import { getStorage, uploadBytes } from "firebase/storage";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {doc, getFirestore, setDoc} from "firebase/firestore"
+import {doc, getDoc, getFirestore, setDoc} from "firebase/firestore"
 
 
 // Your web app's Firebase configuration
@@ -254,4 +254,12 @@ buttonDoc.addEventListener('click', () =>{
     surname: inputSurname.value,
     age: inputAge.value
   }).then(() => console.log("sukcess"))
+})
+
+const jkDoc = doc(db, 'users', 'PaulinaKapeć30');
+getDoc(jkDoc).then(doc => {
+  inputName.value = doc.data().name;
+  inputSurname.value = doc.data().surname;
+  inputAge.value = doc.data().age;
+
 })
