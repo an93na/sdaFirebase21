@@ -167,12 +167,38 @@ const storage = getStorage(app);
 const select1 = document.createElement('select')
 select1.setAttribute('id', 'myAlbum');
 document.body.appendChild(select1);
+let opt1 = document.createElement('option');
+select1.appendChild(opt1);
+const inputAlbum = document.createElement('input');
+inputAlbum.setAttribute('type', 'file');
+document.body.appendChild(inputAlbum);
+const buttonAlbum = document.createElement('button');
+buttonAlbum.innerText = "Załaduj zdjęcie";
+buttonAlbum.setAttribute('id', 'ZaladujFoto');
+document.body.appendChild(buttonAlbum);
+
+
+buttonAlbum.addEventListener('click', () => {
+  if(select1.value){
+    console.log(select1.value);
+    const file = inputAlbum.files[0];
+    const imageRef = ref(storage, `${select1.value}/${file.name}`)
+    uploadBytes(imageRef, file).then((uploadResult) => {
+     console.log('sukces');
+    })}
+  
+
+})
+
 const storageRef = ref(storage);
 listAll(storageRef).then(res => { 
   res.prefixes.forEach(prefix => {
     console.log(prefix.name);
+    
     let opt = document.createElement('option');
     opt.innerText = prefix.name;
     select1.appendChild(opt);
+
   })
+  
   });
