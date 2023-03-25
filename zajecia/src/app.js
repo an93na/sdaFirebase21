@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import { getStorage, uploadBytes } from "firebase/storage";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore"
+import {addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
 
 
 // Your web app's Firebase configuration
@@ -288,22 +288,58 @@ buttonDoc.addEventListener('click', () =>{
 })
 
 const ol = document.createElement('ol');
-ol.setAttribute('id', 'listaUzytkownikow')
+ol.setAttribute('id', 'listaUzytkownikow');
 document.body.appendChild(ol);
+const EditBtn = document.getElementById('editUser');
+const edytowanyUz = document.getElementById('userID');
 
 const usersCollection = collection(db, "users");
 
 getDocs(usersCollection).then(docs => {
-docs.forEach((doc) => {
+docs.forEach((mydoc) => {
   const li = document.createElement('li');
-  const button = document.createElement('button');
+  const editButton = document.createElement('button');
 
-  const myUser = doc.data();
+  const myUser = mydoc.data();
+  // console.log(doc.id)
   
   li.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`;
-  button.innerText = 'edytuj';
+  editButton.innerText = 'edytuj';
+  editButton.style.padding = '5px';
+  editButton.style.margin = '5px';
+  
+  editButton.addEventListener('click', () => {
+    inputName.value = myUser.name,
+    inputSurname.value = myUser.surname,
+    inputAge.value =  myUser.age;
+    buttonDoc.style.display = 'none';
+    EditBtn.style.display = 'inline';
+    edytowanyUz.innerText = mydoc.id;
+
+  })
+  const idUzyt = mydoc.id;
+  // console.log(idUzyt)
+
 
   ol.appendChild(li);
-  li.appendChild(button);
+  li.appendChild(editButton);
+
 })  
+});    
+EditBtn.addEventListener('click', () => {
+      const jkDoc = doc(db, "users", edytowanyUz.innerText);
+      updateDoc(jkDoc, {
+      name: inputName.value,
+      surname: inputSurname.value,
+      age: inputAge.value
+}).then(() => {
+  edytowanyUz.innerText = '';
+  inputName.value = '';
+  inputSurname.value = '';
+  inputAge.value = '';
+  buttonDoc.style.display = 'inline-block';
+  EditBtn.style.display = 'none';
+  
+})
 });
+
