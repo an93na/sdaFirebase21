@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import { getStorage, uploadBytes } from "firebase/storage";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {getFirestore} from "firebase/firestore"
+import {doc, getFirestore, setDoc} from "firebase/firestore"
 
 
 // Your web app's Firebase configuration
@@ -231,3 +231,27 @@ const db = getFirestore(app);
   
 //   });
 
+const inputName = document.createElement('input');
+const inputSurname = document.createElement('input');
+const inputAge = document.createElement('input');
+const buttonDoc = document.createElement('button');
+
+inputAge.setAttribute('type', 'number');
+buttonDoc.innerText='Dodaj';
+
+document.body.appendChild(inputName);
+document.body.appendChild(inputSurname);
+document.body.appendChild(inputAge);
+document.body.appendChild(buttonDoc);
+
+
+buttonDoc.addEventListener('click', () =>{
+  
+  const myId = `${inputName.value}${inputSurname.value}${inputAge.value}`;
+  const jkDoc = doc(db, 'users', myId);
+  setDoc(jkDoc, {
+    name: inputName.value,
+    surname: inputSurname.value,
+    age: inputAge.value
+  }).then(() => console.log("sukcess"))
+})
