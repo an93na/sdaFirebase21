@@ -279,6 +279,9 @@ const button2 = document.createElement('button');
 const button3 = document.createElement('button');
 const button4 = document.createElement('button');
 
+const ol2 = document.createElement('ol');
+ol2.setAttribute('id', 'olLista');
+
 inputFile2.setAttribute('type', 'file');
 inputFile2.setAttribute('id', 'myFile2'); 
 
@@ -299,13 +302,15 @@ button3.innerText= 'dodaj do K3';
 button4.setAttribute('id', 'myButt4');
 button4.innerText= 'dodaj do K4';
 
+
 document.body.appendChild(headerKat);
-document.body.appendChild(inputFile2);
-document.body.appendChild(inputTekst2);
-document.body.appendChild(button1);
-document.body.appendChild(button2);
-document.body.appendChild(button3);
-document.body.appendChild(button4);
+document.body.appendChild(ol2);
+ol2.appendChild(inputFile2);
+ol2.appendChild(inputTekst2);
+ol2.appendChild(button1);
+ol2.appendChild(button2);
+ol2.appendChild(button3);
+ol2.appendChild(button4);
 
 const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af"
 
@@ -363,7 +368,7 @@ document.getElementById("myButt3").addEventListener('click', () => {
   uploadBytes(imageRef, file).then((uploadResult) => {
     console.log('Sukces!')
   })
-})
+});
 
 document.getElementById("myButt4").addEventListener('click', () => {
   const file = document.getElementById('myFile2').files[0];
@@ -380,4 +385,4 @@ document.getElementById("myButt4").addEventListener('click', () => {
   uploadBytes(imageRef, file).then((uploadResult) => {
     console.log('Sukces!')
   })
-})
+});

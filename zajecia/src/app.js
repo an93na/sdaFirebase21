@@ -164,10 +164,15 @@ const storage = getStorage(app);
 //   });
 // });
 
-
+const select1 = document.createElement('select')
+select1.setAttribute('id', 'myAlbum');
+document.body.appendChild(select1);
 const storageRef = ref(storage);
 listAll(storageRef).then(res => { 
   res.prefixes.forEach(prefix => {
     console.log(prefix.name);
+    let opt = document.createElement('option');
+    opt.innerText = prefix.name;
+    select1.appendChild(opt);
   })
   });
