@@ -119,47 +119,55 @@ const storage = getStorage(app);
 //      Ola.appendChild(newOla)  // li dodajemy do ol - appendChild  
 //   }
 // });
-const img = document.createElement("img");
-const storageRef = ref(storage);
-listAll(storageRef).then(res => {
-  const Ola = document.getElementById("photoList");
+// const img = document.createElement("img");
+// const storageRef = ref(storage);
+// listAll(storageRef).then(res => {
+//   const Ola = document.getElementById("photoList");
   
-  res.items.forEach(item => {
-    let newOla = document.createElement("li");
-    const przycisk = document.createElement("button");
-    const przyciskDel = document.createElement("button");
+//   res.items.forEach(item => {
+//     let newOla = document.createElement("li");
+//     const przycisk = document.createElement("button");
+//     const przyciskDel = document.createElement("button");
 
-    przycisk.addEventListener("click", () => {
-    const imageRef = ref(storage,item.name);
+//     przycisk.addEventListener("click", () => {
+//     const imageRef = ref(storage,item.name);
     
-    getDownloadURL(imageRef).then(url => {  
-        img.src = url;
-        img.style.width = "250px";
-        document.body.appendChild(img);
-      })
+//     getDownloadURL(imageRef).then(url => {  
+//         img.src = url;
+//         img.style.width = "250px";
+//         document.body.appendChild(img);
+//       })
 
-    // console.log(imageRef)
-  });
+//     // console.log(imageRef)
+//   });
   
 
-    przyciskDel.addEventListener("click", () => {
-    const imageRef = ref(storage,item.name);
+//     przyciskDel.addEventListener("click", () => {
+//     const imageRef = ref(storage,item.name);
 
-    deleteObject(imageRef).then( url => { 
-    // console.log("usunięto")
-    location.reload();}
+//     deleteObject(imageRef).then( url => { 
+//     // console.log("usunięto")
+//     location.reload();}
         
-      )
+//       )
 
-    // console.log(imageRef)
+//     // console.log(imageRef)
+//   });
+
+//     przycisk.innerText= "Naciśnij Proszę"
+//     przyciskDel.innerText = "Usuń"
+//     newOla.innerText = item.name;
+
+//     Ola.appendChild(newOla);
+//     newOla.appendChild(przycisk);
+//     newOla.appendChild(przyciskDel);
+//   });
+// });
+
+
+const storageRef = ref(storage);
+listAll(storageRef).then(res => { 
+  res.prefixes.forEach(prefix => {
+    console.log(prefix.name);
+  })
   });
-
-    przycisk.innerText= "Naciśnij Proszę"
-    przyciskDel.innerText = "Usuń"
-    newOla.innerText = item.name;
-
-    Ola.appendChild(newOla);
-    newOla.appendChild(przycisk);
-    newOla.appendChild(przyciskDel);
-  });
-});
