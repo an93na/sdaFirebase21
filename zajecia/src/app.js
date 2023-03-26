@@ -508,7 +508,7 @@ ui.start('#firebaseui-auth-container', {
       EmailAuthProvider.PROVIDER_ID,
       GoogleAuthProvider.PROVIDER_ID
   ],
-  signInSuccessUrl: "http://localhost:8080/"
+  signInSuccessUrl: "https://moj121frontpol.web.app/"
 });
 
 onAuthStateChanged(auth, (user) => {
