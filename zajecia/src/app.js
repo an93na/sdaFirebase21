@@ -295,8 +295,10 @@ const edytowanyUz = document.getElementById('userID');
 
 const usersCollection = collection(db, "users");
 
-getDocs(usersCollection).then(docs => {
-docs.forEach((mydoc) => {
+function generateUserList(){
+  getDocs(usersCollection).then(docs => {
+  ol.innerText = '';
+  docs.forEach((mydoc) => {
   const li = document.createElement('li');
   const editButton = document.createElement('button');
   const delButton = document.createElement('button');
@@ -325,8 +327,10 @@ docs.forEach((mydoc) => {
 
   delButton.addEventListener('click', ()=> {
     const jkDoc = doc(db, "users", mydoc.id);
-    deleteDoc(jkDoc)
-    ol.removeChild(li);
+    deleteDoc(jkDoc).then (() => {console.log('usunięto')
+      generateUserList();
+  });
+    
   });
   const idUzyt = mydoc.id;
   // console.log(idUzyt)
@@ -337,7 +341,8 @@ docs.forEach((mydoc) => {
   li.appendChild(delButton);
 
 })  
-});    
+})}    
+generateUserList()
 EditBtn.addEventListener('click', () => {
       const jkDoc = doc(db, "users", edytowanyUz.innerText);
       updateDoc(jkDoc, {
@@ -351,7 +356,7 @@ EditBtn.addEventListener('click', () => {
   inputAge.value = '';
   buttonDoc.style.display = 'inline-block';
   EditBtn.style.display = 'none';
-  
+  generateUserList();
 })
 });
 
