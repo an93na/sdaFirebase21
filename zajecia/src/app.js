@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import { getStorage, uploadBytes } from "firebase/storage";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
+import {addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where} from "firebase/firestore"
 
 
 // Your web app's Firebase configuration
@@ -363,3 +363,30 @@ const db = getFirestore(app);
 // })
 // });
 
+const wpiszImie = document.createElement('input');
+const szukajImie = document.createElement('button');
+const listaElementow = document.createElement('ol');
+
+wpiszImie.style.placeholder = 'imie';
+szukajImie.innerText = 'wyszukaj';
+
+document.body.appendChild(wpiszImie);
+document.body.appendChild(szukajImie);
+document.body.appendChild(listaElementow);
+
+szukajImie.addEventListener('click', () => {
+const users = collection(db, "users");
+const imieWpisane = query(users, where("name", "==", wpiszImie.value));
+
+getDocs(imieWpisane).then(docs => {
+  listaElementow.innerHTML = "";
+  docs.forEach(myDoc => {
+  console.log(myDoc.data())
+  let myUser = myDoc.data()
+  const myLi = document.createElement('li')
+  myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`
+  listaElementow.appendChild(myLi);
+})
+ })
+
+}) 
