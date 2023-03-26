@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import { getStorage, uploadBytes } from "firebase/storage";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
+import {addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
 
 
 // Your web app's Firebase configuration
@@ -299,6 +299,7 @@ getDocs(usersCollection).then(docs => {
 docs.forEach((mydoc) => {
   const li = document.createElement('li');
   const editButton = document.createElement('button');
+  const delButton = document.createElement('button');
 
   const myUser = mydoc.data();
   // console.log(doc.id)
@@ -308,6 +309,10 @@ docs.forEach((mydoc) => {
   editButton.style.padding = '5px';
   editButton.style.margin = '5px';
   
+  delButton.innerText = 'usuń';
+  delButton.style.padding = '5px';
+  delButton.style.margin = '5px';
+  
   editButton.addEventListener('click', () => {
     inputName.value = myUser.name,
     inputSurname.value = myUser.surname,
@@ -316,13 +321,20 @@ docs.forEach((mydoc) => {
     EditBtn.style.display = 'inline';
     edytowanyUz.innerText = mydoc.id;
 
-  })
+  });
+
+  delButton.addEventListener('click', ()=> {
+    const jkDoc = doc(db, "users", mydoc.id);
+    deleteDoc(jkDoc)
+    ol.removeChild(li);
+  });
   const idUzyt = mydoc.id;
   // console.log(idUzyt)
 
 
   ol.appendChild(li);
   li.appendChild(editButton);
+  li.appendChild(delButton);
 
 })  
 });    
