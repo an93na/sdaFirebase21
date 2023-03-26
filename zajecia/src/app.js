@@ -264,99 +264,102 @@ const db = getFirestore(app);
 
 // });
 
-const inputName = document.createElement('input');
-const inputSurname = document.createElement('input');
-const inputAge = document.createElement('input');
-const buttonDoc = document.createElement('button');
+// const inputName = document.createElement('input');
+// const inputSurname = document.createElement('input');
+// const inputAge = document.createElement('input');
+// const buttonDoc = document.createElement('button');
 
-inputAge.setAttribute('type', 'number');
-buttonDoc.innerText='Dodaj';
+// inputAge.setAttribute('type', 'number');
+// buttonDoc.innerText='Dodaj';
 
-document.body.appendChild(inputName);
-document.body.appendChild(inputSurname);
-document.body.appendChild(inputAge);
-document.body.appendChild(buttonDoc);
+// document.body.appendChild(inputName);
+// document.body.appendChild(inputSurname);
+// document.body.appendChild(inputAge);
+// document.body.appendChild(buttonDoc);
 
+// const ol = document.createElement('ol');
+// ol.setAttribute('id', 'listaUzytkownikow');
+// document.body.appendChild(ol);
+// const EditBtn = document.getElementById('editUser');
+// const edytowanyUz = document.getElementById('userID');
 
-buttonDoc.addEventListener('click', () =>{
-  const usersCollection = collection(db, "users")
-  addDoc(usersCollection, {
-  name: inputName.value,
-  surname: inputSurname.value,
-  age: inputAge.value
-})
-})
+// const usersCollection = collection(db, "users");
 
-const ol = document.createElement('ol');
-ol.setAttribute('id', 'listaUzytkownikow');
-document.body.appendChild(ol);
-const EditBtn = document.getElementById('editUser');
-const edytowanyUz = document.getElementById('userID');
+// function generateUserList(){
+//   getDocs(usersCollection).then(docs => {
+//   ol.innerText = '';
+//   docs.forEach((mydoc) => {
+//   const li = document.createElement('li');
+//   const editButton = document.createElement('button');
+//   const delButton = document.createElement('button');
 
-const usersCollection = collection(db, "users");
-
-function generateUserList(){
-  getDocs(usersCollection).then(docs => {
-  ol.innerText = '';
-  docs.forEach((mydoc) => {
-  const li = document.createElement('li');
-  const editButton = document.createElement('button');
-  const delButton = document.createElement('button');
-
-  const myUser = mydoc.data();
-  // console.log(doc.id)
+//   const myUser = mydoc.data();
+//   // console.log(doc.id)
   
-  li.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`;
-  editButton.innerText = 'edytuj';
-  editButton.style.padding = '5px';
-  editButton.style.margin = '5px';
+//   li.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`;
+//   editButton.innerText = 'edytuj';
+//   editButton.style.padding = '5px';
+//   editButton.style.margin = '5px';
   
-  delButton.innerText = 'usuń';
-  delButton.style.padding = '5px';
-  delButton.style.margin = '5px';
+//   delButton.innerText = 'usuń';
+//   delButton.style.padding = '5px';
+//   delButton.style.margin = '5px';
   
-  editButton.addEventListener('click', () => {
-    inputName.value = myUser.name,
-    inputSurname.value = myUser.surname,
-    inputAge.value =  myUser.age;
-    buttonDoc.style.display = 'none';
-    EditBtn.style.display = 'inline';
-    edytowanyUz.innerText = mydoc.id;
+//   editButton.addEventListener('click', () => {
+//     inputName.value = myUser.name,
+//     inputSurname.value = myUser.surname,
+//     inputAge.value =  myUser.age;
+//     buttonDoc.style.display = 'none';
+//     EditBtn.style.display = 'inline';
+//     edytowanyUz.innerText = mydoc.id;
 
-  });
+//   });
 
-  delButton.addEventListener('click', ()=> {
-    const jkDoc = doc(db, "users", mydoc.id);
-    deleteDoc(jkDoc).then (() => {console.log('usunięto')
-      generateUserList();
-  });
+//   delButton.addEventListener('click', ()=> {
+//     const jkDoc = doc(db, "users", mydoc.id);
+//     deleteDoc(jkDoc).then (() => {console.log('usunięto')
+//       generateUserList();
+//   });
     
-  });
-  const idUzyt = mydoc.id;
-  // console.log(idUzyt)
+//   });
+//   const idUzyt = mydoc.id;
+//   // console.log(idUzyt)
 
 
-  ol.appendChild(li);
-  li.appendChild(editButton);
-  li.appendChild(delButton);
+//   ol.appendChild(li);
+//   li.appendChild(editButton);
+//   li.appendChild(delButton);
 
-})  
-})}    
-generateUserList()
-EditBtn.addEventListener('click', () => {
-      const jkDoc = doc(db, "users", edytowanyUz.innerText);
-      updateDoc(jkDoc, {
-      name: inputName.value,
-      surname: inputSurname.value,
-      age: inputAge.value
-}).then(() => {
-  edytowanyUz.innerText = '';
-  inputName.value = '';
-  inputSurname.value = '';
-  inputAge.value = '';
-  buttonDoc.style.display = 'inline-block';
-  EditBtn.style.display = 'none';
-  generateUserList();
-})
-});
+// })  
+// })}    
+
+// generateUserList()
+
+// buttonDoc.addEventListener('click', () =>{
+//   const usersCollection = collection(db, "users")
+//     addDoc(usersCollection, {
+//     name: inputName.value,
+//     surname: inputSurname.value,
+//     age: inputAge.value
+//   }).then(() => {
+//     generateUserList();
+//   })
+//   })
+
+// EditBtn.addEventListener('click', () => {
+//       const jkDoc = doc(db, "users", edytowanyUz.innerText);
+//       updateDoc(jkDoc, {
+//       name: inputName.value,
+//       surname: inputSurname.value,
+//       age: inputAge.value
+// }).then(() => {
+//   edytowanyUz.innerText = '';
+//   inputName.value = '';
+//   inputSurname.value = '';
+//   inputAge.value = '';
+//   buttonDoc.style.display = 'inline-block';
+//   EditBtn.style.display = 'none';
+//   generateUserList();
+// })
+// });
 
