@@ -390,3 +390,22 @@ getDocs(imieWpisane).then(docs => {
  })
 
 }) 
+
+
+wpiszImie.addEventListener('keydown', (event) => {
+  if(event.key === 'Enter'){
+    const users = collection(db, "users");
+const imieWpisane = query(users, where("name", "==", wpiszImie.value));
+
+getDocs(imieWpisane).then(docs => {
+  listaElementow.innerHTML = "";
+  docs.forEach(myDoc => {
+  console.log(myDoc.data())
+  let myUser = myDoc.data()
+  const myLi = document.createElement('li')
+  myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`
+  listaElementow.appendChild(myLi);
+})
+ })
+  }
+}) 
