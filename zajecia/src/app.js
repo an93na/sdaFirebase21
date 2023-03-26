@@ -8,6 +8,9 @@ import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import {addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where} from "firebase/firestore"
 import { getDatabase, onChildAdded, onValue, push, ref as rdbRef, set } from "firebase/database";
+import { getAuth, EmailAuthProvider, onAuthStateChanged, GoogleAuthProvider, signOut } from "firebase/auth";
+import * as firebaseui from 'firebaseui';
+
 
 
 // Your web app's Firebase configuration
@@ -26,6 +29,11 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 const db = getFirestore(app);
 const rdb = getDatabase(app);
+
+//do autentykacji
+const auth = getAuth(app);
+const ui = new firebaseui.auth.AuthUI(auth);
+
 
 // const url = "https://firebasestorage.googleapis.com/v0/b/moj121frontpol.appspot.com/o/IMG_20201122_101754.jpg?alt=media&token=6cf101bc-283b-4815-a7c2-1cddf9d7c995"
 
@@ -455,12 +463,17 @@ const rdb = getDatabase(app);
 //   }
 // })
 
+
+// function zalogowany () {
 const messageTextInput = document.createElement('textarea');
 const sendBtn = document.createElement('button');
+const wyloguj = document.createElement('button');
 const messageContainer = document.createElement('div');
 
+wyloguj.innerText = "wyloguj";
 sendBtn.innerText = 'wyślij'
 
+document.body.appendChild(wyloguj);
 document.body.appendChild(messageTextInput);
 document.body.appendChild(sendBtn);
 document.body.appendChild(messageContainer);
@@ -484,4 +497,46 @@ sendBtn.addEventListener('click', () => {
     text: messageTextInput.value,
     timestamp: new Date().toISOString()
   }) 
+});
+// }
+
+
+
+
+ui.start('#firebaseui-auth-container', {
+  signInOptions: [
+      EmailAuthProvider.PROVIDER_ID,
+      GoogleAuthProvider.PROVIDER_ID
+  ],
+  signInSuccessUrl: "http://localhost:8080/"
+});
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    messageTextInput.style.display = 'block';
+    sendBtn.style.display = 'block';
+    messageContainer.style.display = 'flex';
+    // zalogowany();
+    
+  } else {
+    messageTextInput.style.display = 'none';
+    sendBtn.style.display = 'none';
+    messageContainer.style.display = 'none';
+    wyloguj.style.display = 'none';
+  }
+});
+
+wyloguj.addEventListener('click', () => {
+  signOut(auth).then(() => {
+    console.log("Wylogowano!");
+    // location.reload()
+    const wiadomosc = document.createElement("h2");
+    wiadomosc.innerText = "Nastąpiło wylogowanie";
+    document.body.appendChild(wiadomosc);
+    setTimeout(() => {
+      wiadomosc.innerText = '';
+    }, 2000);
+   });
 })
+ 
+ 
