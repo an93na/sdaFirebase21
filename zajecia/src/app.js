@@ -7,6 +7,7 @@ import { initializeApp } from "firebase/app";
 // import { getStorage, uploadBytes } from "firebase/storage";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import {addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where} from "firebase/firestore"
+import { getDatabase, onChildAdded, onValue, push, ref as rdbRef, set } from "firebase/database";
 
 
 // Your web app's Firebase configuration
@@ -14,6 +15,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDz-schzsSeoer3tFdieQIAbt6UpQ1S0KQ",
   authDomain: "moj121frontpol.firebaseapp.com",
   projectId: "moj121frontpol",
+  databaseURL: "https://moj121frontpol-default-rtdb.europe-west1.firebasedatabase.app",
   storageBucket: "moj121frontpol.appspot.com",
   messagingSenderId: "127781220621",
   appId: "1:127781220621:web:2bb4d7b5a19af12e5f8044"
@@ -23,7 +25,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 const db = getFirestore(app);
-
+const rdb = getDatabase(app);
 
 // const url = "https://firebasestorage.googleapis.com/v0/b/moj121frontpol.appspot.com/o/IMG_20201122_101754.jpg?alt=media&token=6cf101bc-283b-4815-a7c2-1cddf9d7c995"
 
@@ -363,49 +365,123 @@ const db = getFirestore(app);
 // })
 // });
 
-const wpiszImie = document.createElement('input');
-const szukajImie = document.createElement('button');
-const listaElementow = document.createElement('ol');
+// const wpiszImie = document.createElement('input');
+// const szukajImie = document.createElement('button');
+// const listaElementow = document.createElement('ol');
 
-wpiszImie.style.placeholder = 'imie';
-szukajImie.innerText = 'wyszukaj';
+// wpiszImie.style.placeholder = 'imie';
+// szukajImie.innerText = 'wyszukaj';
 
-document.body.appendChild(wpiszImie);
-document.body.appendChild(szukajImie);
-document.body.appendChild(listaElementow);
+// document.body.appendChild(wpiszImie);
+// document.body.appendChild(szukajImie);
+// document.body.appendChild(listaElementow);
 
-szukajImie.addEventListener('click', () => {
-const users = collection(db, "users");
-const imieWpisane = query(users, where("name", "==", wpiszImie.value));
+// szukajImie.addEventListener('click', () => {
+// const users = collection(db, "users");
+// const imieWpisane = query(users, where("name", "==", wpiszImie.value));
 
-getDocs(imieWpisane).then(docs => {
-  listaElementow.innerHTML = "";
-  docs.forEach(myDoc => {
-  console.log(myDoc.data())
-  let myUser = myDoc.data()
-  const myLi = document.createElement('li')
-  myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`
-  listaElementow.appendChild(myLi);
+// getDocs(imieWpisane).then(docs => {
+//   listaElementow.innerHTML = "";
+//   docs.forEach(myDoc => {
+//   console.log(myDoc.data())
+//   let myUser = myDoc.data()
+//   const myLi = document.createElement('li')
+//   myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`
+//   listaElementow.appendChild(myLi);
+// })
+//  })
+
+// }) 
+
+
+// wpiszImie.addEventListener('keydown', (event) => {
+//   if(event.key === 'Enter'){
+//     const users = collection(db, "users");
+// const imieWpisane = query(users, where("name", "==", wpiszImie.value));
+
+// getDocs(imieWpisane).then(docs => {
+//   listaElementow.innerHTML = "";
+//   docs.forEach(myDoc => {
+//   console.log(myDoc.data())
+//   let myUser = myDoc.data()
+//   const myLi = document.createElement('li')
+//   myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`
+//   listaElementow.appendChild(myLi);
+// })
+//  })
+//   }
+// }) 
+
+
+
+
+
+// const janRef = rdbRef(rdb, 'users/JanId');
+// set(janRef, {
+//   name: 'Jan',
+//   surname: 'Kowalski'
+// }) 
+
+// const usersRef = rdbRef(rdb, 'users');
+// const janRef = push(usersRef);
+
+// set(janRef, {
+//   name: 'NowyJan',
+//   surname: 'NowyKowalski'
+// }
+//   );
+
+// const usersRef = rdbRef(rdb, 'users');
+// onValue(usersRef,snapshot => {
+//   console.log(snapshot);
+//   console.log(snapshot.val());
+//   const myUsers = snapshot.val();
+//   console.log(myUsers)
+
+//   for(let prop in myUsers){
+//     console.log(prop)
+//   }
+// })
+// 
+// const usersRef = rdbRef(rdb, 'users');
+// onChildAdded(usersRef,snapshot => {
+//   console.log(snapshot);
+//   console.log(snapshot.val());
+//   const myUsers = snapshot.val();
+//   console.log(myUsers)
+
+//   for(let prop in myUsers){
+//     console.log(prop)
+//   }
+// })
+
+const messageTextInput = document.createElement('textarea');
+const sendBtn = document.createElement('button');
+const messageContainer = document.createElement('div');
+
+sendBtn.innerText = 'wyślij'
+
+document.body.appendChild(messageTextInput);
+document.body.appendChild(sendBtn);
+document.body.appendChild(messageContainer);
+
+messageContainer.setAttribute('class', 'message-container')
+
+const messagesRef = rdbRef(rdb, 'messages')
+onChildAdded(messagesRef, (messageSnapshot) => {
+    const mySpan = document.createElement('span');
+    const message = messageSnapshot.val();
+
+    mySpan.innerText = `${message.timestamp} ------ ${message.text}`;
+
+    messageContainer.appendChild(mySpan);
 })
- })
 
-}) 
+sendBtn.addEventListener('click', () => {
+  const messageRef = push(messagesRef);
 
-
-wpiszImie.addEventListener('keydown', (event) => {
-  if(event.key === 'Enter'){
-    const users = collection(db, "users");
-const imieWpisane = query(users, where("name", "==", wpiszImie.value));
-
-getDocs(imieWpisane).then(docs => {
-  listaElementow.innerHTML = "";
-  docs.forEach(myDoc => {
-  console.log(myDoc.data())
-  let myUser = myDoc.data()
-  const myLi = document.createElement('li')
-  myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`
-  listaElementow.appendChild(myLi);
+  set(messageRef, {
+    text: messageTextInput.value,
+    timestamp: new Date().toISOString()
+  }) 
 })
- })
-  }
-}) 
