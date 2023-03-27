@@ -388,10 +388,14 @@ listAll(storageRef).then((res) => {
 
 //Iterujemy sie po folderach
 const listaFolderów = document.createElement('select');
+const nazwaDlaPliku = document.createElement('input');
 const btnFolder = document.createElement('button');
 const pustyOpt = document.createElement('option');
 
+nazwaDlaPliku.setAttribute('type', 'file')
+
 document.body.appendChild(listaFolderów);
+document.body.appendChild(nazwaDlaPliku)
 document.body.appendChild(btnFolder);
 listaFolderów.appendChild(pustyOpt);
 
