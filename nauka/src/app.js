@@ -391,13 +391,18 @@ const listaFolderów = document.createElement('select');
 const nazwaDlaPliku = document.createElement('input');
 const btnFolder = document.createElement('button');
 const pustyOpt = document.createElement('option');
+const showPhoto = document.createElement('button');
 
+
+btnFolder.innerText = 'dodaj';
+showPhoto.innerText = 'wyświetl zdjęcie'
 nazwaDlaPliku.setAttribute('type', 'file')
 
 document.body.appendChild(listaFolderów);
 document.body.appendChild(nazwaDlaPliku)
 document.body.appendChild(btnFolder);
 listaFolderów.appendChild(pustyOpt);
+document.body.appendChild(showPhoto);
 
 listAll(storageRef).then((res) => {
   
@@ -406,11 +411,34 @@ listAll(storageRef).then((res) => {
     const folderNazwa = document.createElement('option');
     
     folderNazwa.innerText = prefix.fullPath;
-    btnFolder.innerText = 'dodaj';
+    
 
     listaFolderów.appendChild(folderNazwa);
   }) 
-    
-  
-  
 })
+  btnFolder.addEventListener('click', ()=> {
+  if(listaFolderów.value){
+    console.log(listaFolderów.value);
+
+    const file = nazwaDlaPliku.files[0];
+    let fileName = file.name;
+
+    const imageRef = ref(storage, `${listaFolderów.value}/${fileName}`);
+
+    uploadBytes(imageRef, file).then(() => {
+      console.log("Sukces!");
+}) }})
+
+  showPhoto.addEventListener("click", ()=> {
+    const albumRef = ref(storage, listaFolderów.value);
+    listAll(albumRef).then((res => {
+      res.items.forEach(item => {
+        const itemRef = ref(storage,item.name) 
+      })
+      getDownloadURL(imageRef).then(url => {
+        //     img.src = url;
+        //     img.style.width = '200px'
+        //     // img.style.height = '120px'
+        //     document.body.appendChild(img);
+    })}))
+  })
