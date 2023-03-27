@@ -434,14 +434,14 @@ listAll(storageRef).then((res) => {
     const albumRef = ref(storage, listaFolderów.value);
     listAll(albumRef).then((res => {
       res.items.forEach(item => {
-        const itemRef = ref(storage,item.name)
+        const itemRef = ref(storage,item.fullPath)
         
-        getDownloadURL(itemRef).then(url => {
-      const img = document.createElement('img') 
-      img.src = url;
-      img.style.width = '200px'
-      document.body.appendChild(img);
-    })
+      getDownloadURL(itemRef).then(url => {
+        const img = document.createElement('img') 
+        img.src = url;
+        img.style.width = '200px'
+        document.body.appendChild(img);
+      })
       })
       }))
   })
