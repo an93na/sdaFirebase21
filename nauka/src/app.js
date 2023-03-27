@@ -387,22 +387,24 @@ listAll(storageRef).then((res) => {
 // });
 
 //Iterujemy sie po folderach
-const listaFolderów = document.createElement('ol');
+const listaFolderów = document.createElement('select');
+const btnFolder = document.createElement('button');
+const pustyOpt = document.createElement('option');
 
 document.body.appendChild(listaFolderów);
+document.body.appendChild(btnFolder);
+listaFolderów.appendChild(pustyOpt);
 
 listAll(storageRef).then((res) => {
   
   res.prefixes.forEach( prefix => {
     // console.log(prefix.fullPath);
-    const folderNazwa = document.createElement('li');
-    const btnFolder = document.createElement('button');
-
+    const folderNazwa = document.createElement('option');
+    
     folderNazwa.innerText = prefix.fullPath;
     btnFolder.innerText = 'dodaj';
 
     listaFolderów.appendChild(folderNazwa);
-    folderNazwa.appendChild(btnFolder);
   }) 
     
   
