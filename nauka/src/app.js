@@ -428,17 +428,20 @@ listAll(storageRef).then((res) => {
     uploadBytes(imageRef, file).then(() => {
       console.log("Sukces!");
 }) }})
-
+ 
+    
   showPhoto.addEventListener("click", ()=> {
     const albumRef = ref(storage, listaFolderów.value);
     listAll(albumRef).then((res => {
       res.items.forEach(item => {
-        const itemRef = ref(storage,item.name) 
+        const itemRef = ref(storage,item.name)
+        
+        getDownloadURL(itemRef).then(url => {
+      const img = document.createElement('img') 
+      img.src = url;
+      img.style.width = '200px'
+      document.body.appendChild(img);
+    })
       })
-      getDownloadURL(imageRef).then(url => {
-        //     img.src = url;
-        //     img.style.width = '200px'
-        //     // img.style.height = '120px'
-        //     document.body.appendChild(img);
-    })}))
+      }))
   })
