@@ -270,119 +270,141 @@ listAll(storageRef).then((res) => {
     })
 
 
-//zad7
-const headerKat = document.createElement('h1');
-const inputFile2 = document.createElement('input');
-const inputTekst2 = document.createElement('input');
-const button1 = document.createElement('button');
-const button2 = document.createElement('button');
-const button3 = document.createElement('button');
-const button4 = document.createElement('button');
+// const headerKat = document.createElement('h1');
+// const inputFile2 = document.createElement('input');
+// const inputTekst2 = document.createElement('input');
+// const button1 = document.createElement('button');
+// const button2 = document.createElement('button');
+// const button3 = document.createElement('button');
+// const button4 = document.createElement('button');
 
-const ol2 = document.createElement('ol');
-ol2.setAttribute('id', 'olLista');
+// const ol2 = document.createElement('ol');
+// ol2.setAttribute('id', 'olLista');
 
-inputFile2.setAttribute('type', 'file');
-inputFile2.setAttribute('id', 'myFile2'); 
+// inputFile2.setAttribute('type', 'file');
+// inputFile2.setAttribute('id', 'myFile2'); 
 
-inputTekst2.setAttribute('type', 'text');
-inputTekst2.setAttribute('id', 'myFileText2');
+// inputTekst2.setAttribute('type', 'text');
+// inputTekst2.setAttribute('id', 'myFileText2');
 
-headerKat.innerText = 'Dodawanie pliku do folderu';
+// headerKat.innerText = 'Dodawanie pliku do folderu';
 
-button1.setAttribute('id', 'myButt');
-button1.innerText= 'dodaj do K1';
+// button1.setAttribute('id', 'myButt');
+// button1.innerText= 'dodaj do K1';
 
-button2.setAttribute('id', 'myButt2');
-button2.innerText= 'dodaj do K2';
+// button2.setAttribute('id', 'myButt2');
+// button2.innerText= 'dodaj do K2';
 
-button3.setAttribute('id', 'myButt3');
-button3.innerText= 'dodaj do K3';
+// button3.setAttribute('id', 'myButt3');
+// button3.innerText= 'dodaj do K3';
 
-button4.setAttribute('id', 'myButt4');
-button4.innerText= 'dodaj do K4';
+// button4.setAttribute('id', 'myButt4');
+// button4.innerText= 'dodaj do K4';
 
 
-document.body.appendChild(headerKat);
-document.body.appendChild(ol2);
-ol2.appendChild(inputFile2);
-ol2.appendChild(inputTekst2);
-ol2.appendChild(button1);
-ol2.appendChild(button2);
-ol2.appendChild(button3);
-ol2.appendChild(button4);
+// document.body.appendChild(headerKat);
+// document.body.appendChild(ol2);
+// ol2.appendChild(inputFile2);
+// ol2.appendChild(inputTekst2);
+// ol2.appendChild(button1);
+// ol2.appendChild(button2);
+// ol2.appendChild(button3);
+// ol2.appendChild(button4);
 
-const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af"
+// const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af"
 
-document.getElementById('myButt').addEventListener('click', ()=> {
-  const file = document.getElementById('myFile2').files[0];
-  const tekstInput = document.getElementById('myFileText2');
+// document.getElementById('myButt').addEventListener('click', ()=> {
+//   const file = document.getElementById('myFile2').files[0];
+//   const tekstInput = document.getElementById('myFileText2');
   
-  let fileName = file.name;
-  let folderName = 'Kategoria1'
+//   let fileName = file.name;
+//   let folderName = 'Kategoria1'
   
 
-  if(tekstInput.value){
-  fileName = tekstInput.value;
-  }
-  let filePath1 = folderName + '/' + fileName;
+//   if(tekstInput.value){
+//   fileName = tekstInput.value;
+//   }
+//   let filePath1 = folderName + '/' + fileName;
 
-  const imageRef = ref(storage, filePath1);
+//   const imageRef = ref(storage, filePath1);
 
-  uploadBytes(imageRef, file).then((uploadResult) => {
-    console.log("Sukces!");
-    })
-});
+//   uploadBytes(imageRef, file).then((uploadResult) => {
+//     console.log("Sukces!");
+//     })
+// });
 
-document.getElementById('myButt2').addEventListener('click', ()=> {
-  const file = document.getElementById('myFile2').files[0];
-  const tekstInput = document.getElementById('myFileText2');
+// document.getElementById('myButt2').addEventListener('click', ()=> {
+//   const file = document.getElementById('myFile2').files[0];
+//   const tekstInput = document.getElementById('myFileText2');
   
-  let fileName = file.name;
-  let folderName = 'Kategoria2';
+//   let fileName = file.name;
+//   let folderName = 'Kategoria2';
 
-  if(tekstInput.value){
-  fileName = tekstInput.value;
-  }
-  let filePath2 = folderName + '/' + fileName;
+//   if(tekstInput.value){
+//   fileName = tekstInput.value;
+//   }
+//   let filePath2 = folderName + '/' + fileName;
   
-  const imageRef = ref(storage, filePath2);
+//   const imageRef = ref(storage, filePath2);
 
-  uploadBytes(imageRef, file).then((uploadResult) => {
-    console.log("Sukces!");
-    })
-});
+//   uploadBytes(imageRef, file).then((uploadResult) => {
+//     console.log("Sukces!");
+//     })
+// });
 
-document.getElementById("myButt3").addEventListener('click', () => {
-  const file = document.getElementById('myFile2').files[0];
-  const tekstInput = document.getElementById('myFileText2');
-  let fileName = file.name;
-  let folderName = 'Kategoria3';
+// document.getElementById("myButt3").addEventListener('click', () => {
+//   const file = document.getElementById('myFile2').files[0];
+//   const tekstInput = document.getElementById('myFileText2');
+//   let fileName = file.name;
+//   let folderName = 'Kategoria3';
 
-  if(tekstInput.value){
-    fileName = tekstInput.value;
-  } 
-  let filePath3 = folderName + '/' + fileName;
-  const imageRef = ref(storage, filePath3);
+//   if(tekstInput.value){
+//     fileName = tekstInput.value;
+//   } 
+//   let filePath3 = folderName + '/' + fileName;
+//   const imageRef = ref(storage, filePath3);
 
-  uploadBytes(imageRef, file).then((uploadResult) => {
-    console.log('Sukces!')
-  })
-});
+//   uploadBytes(imageRef, file).then((uploadResult) => {
+//     console.log('Sukces!')
+//   })
+// });
 
-document.getElementById("myButt4").addEventListener('click', () => {
-  const file = document.getElementById('myFile2').files[0];
-  const tekstInput = document.getElementById('myFileText2');
-  let fileName = file.name;
-  let folderName = 'Kategoria4';
+// document.getElementById("myButt4").addEventListener('click', () => {
+//   const file = document.getElementById('myFile2').files[0];
+//   const tekstInput = document.getElementById('myFileText2');
+//   let fileName = file.name;
+//   let folderName = 'Kategoria4';
 
-  if(tekstInput.value){
-    fileName = tekstInput.value;
-  } 
-  let filePath4 = folderName + '/' + fileName;
-  const imageRef = ref(storage, filePath4);
+//   if(tekstInput.value){
+//     fileName = tekstInput.value;
+//   } 
+//   let filePath4 = folderName + '/' + fileName;
+//   const imageRef = ref(storage, filePath4);
 
-  uploadBytes(imageRef, file).then((uploadResult) => {
-    console.log('Sukces!')
-  })
-});
+//   uploadBytes(imageRef, file).then((uploadResult) => {
+//     console.log('Sukces!')
+//   })
+// });
+
+//Iterujemy sie po folderach
+const listaFolderów = document.createElement('ol');
+
+document.body.appendChild(listaFolderów);
+
+listAll(storageRef).then((res) => {
+  
+  res.prefixes.forEach( prefix => {
+    console.log(prefix.fullPath);
+    const folderNazwa = document.createElement('li');
+    const btnFolder = document.createElement('button');
+
+    folderNazwa.innerText = prefix.fullPath;
+    btnFolder.innerText = 'dodaj';
+
+    listaFolderów.appendChild(folderNazwa);
+    folderNazwa.appendChild(btnFolder);
+  }) 
+    
+  
+  
+})
