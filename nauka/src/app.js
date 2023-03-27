@@ -394,7 +394,7 @@ document.body.appendChild(listaFolderów);
 listAll(storageRef).then((res) => {
   
   res.prefixes.forEach( prefix => {
-    console.log(prefix.fullPath);
+    // console.log(prefix.fullPath);
     const folderNazwa = document.createElement('li');
     const btnFolder = document.createElement('button');
 
