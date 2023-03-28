@@ -389,6 +389,10 @@ listAll(storageRef).then((res) => {
 // });
 
 //Iterujemy sie po folderach
+const naglowek1 = document.createElement("h3");
+naglowek1.innerText = 'Wysyłanie dokumentu do wybranego albumu, wyświetlanie z wybranego albumu';
+document.body.appendChild(naglowek1);
+
 const listaFolderów = document.createElement('select');
 const nazwaDlaPliku = document.createElement('input');
 const btnFolder = document.createElement('button');
@@ -457,6 +461,10 @@ document.body.appendChild(nowaLinia);
   //   surname: 'Kowalski'
   // })
 
+  const naglowek = document.createElement("h3");
+  naglowek.innerText = 'Wysyłanie dokumentu do bazy danych';
+  document.body.appendChild(naglowek);
+
 const imie = document.createElement('input');
 const nazwisko = document.createElement('input');
 const wiek = document.createElement('input');
@@ -484,7 +492,7 @@ setDoc(jkDoc, {
   surname: nazwisko.value,
   age: wiek.value
 }).then(() => {
-  console.log("Sukces!")
+  console.log("Sukces!");
 })
 })
 
