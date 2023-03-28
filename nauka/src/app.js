@@ -455,20 +455,20 @@ const nowaLinia = document.createElement('div')
 document.body.appendChild(nowaLinia);
 
 
-  // const jkDoc = doc(db, 'users', 'JanKowalskiID');
-  // setDoc(jkDoc, {
-  //   name: 'Jan',
-  //   surname: 'Kowalski'
-  // })
+  const jkDoc = doc(db, 'users', 'JanKowalskiID');
+  setDoc(jkDoc, {
+    name: 'Jan',
+    surname: 'Kowalski'
+  })
 
-//   const naglowek = document.createElement("h3");
-//   naglowek.innerText = 'Wysyłanie dokumentu do bazy danych, ID z imienia+nazwiska+wieku';
-//   document.body.appendChild(naglowek);
+  const naglowek = document.createElement("h3");
+  naglowek.innerText = 'Wysyłanie dokumentu do bazy danych, ID z imienia+nazwiska+wieku';
+  document.body.appendChild(naglowek);
 
 const imie = document.createElement('input');
 const nazwisko = document.createElement('input');
 const wiek = document.createElement('input');
-// const przycisk = document.createElement('button');
+const przycisk = document.createElement('button');
 
 imie.setAttribute('type', 'text');
 nazwisko.setAttribute('type', 'text');
@@ -478,7 +478,7 @@ imie.setAttribute('placeholder', 'imie');
 nazwisko.setAttribute('placeholder', 'nazwisko');
 wiek.setAttribute('placeholder', 'wiek');
 
-// przycisk.innerText='wyślij';
+przycisk.innerText='wyślij';
 
 document.body.appendChild(imie);
 document.body.appendChild(nazwisko);
@@ -492,14 +492,17 @@ document.body.appendChild(wiek);
 //   surname: nazwisko.value,
 //   age: wiek.value
 // }).then(() => {
-//   console.log("Sukces!");
+//    console.log("Sukces!");
+//       imie.value = ''
+//       nazwisko.value = ''
+//       wiek.value = ''
 
 // });
 // });
 
-  const naglowek2 = document.createElement("h3");
-  naglowek2.innerText = 'Pobieranie z bazy danych osób';
-  document.body.appendChild(naglowek2);
+const naglowek2 = document.createElement("h3");
+naglowek2.innerText = 'Pobieranie z bazy danych osób';
+document.body.appendChild(naglowek2);
 
 const LauraAster11 = doc(db, "users", "LauraAster11");
 getDoc(LauraAster11).then(dok => {
