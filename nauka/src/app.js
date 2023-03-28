@@ -2,7 +2,7 @@ import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {getFirestore} from "firebase/firestore"
+import {doc, getFirestore, setDoc} from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -447,5 +447,26 @@ listAll(storageRef).then((res) => {
       })
       }))
   });
+const nowaLinia = document.createElement('div')
+document.body.appendChild(nowaLinia);
 
-  
+
+  const jkDoc = doc(db, 'users', 'JanKowalskiID');
+  setDoc(jkDoc, {
+    name: 'Jan',
+    surname: 'Kowalski'
+  })
+
+const imie = document.createElement('input');
+const nazwisko = document.createElement('input');
+const wiek = document.createElement('input');
+
+imie.setAttribute('type', 'text');
+nazwisko.setAttribute('type', 'text');
+wiek.setAttribute('type', 'number');
+
+document.body.appendChild(imie);
+document.body.appendChild(nazwisko);
+document.body.appendChild(wiek);
+
+
