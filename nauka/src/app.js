@@ -451,22 +451,40 @@ const nowaLinia = document.createElement('div')
 document.body.appendChild(nowaLinia);
 
 
-  const jkDoc = doc(db, 'users', 'JanKowalskiID');
-  setDoc(jkDoc, {
-    name: 'Jan',
-    surname: 'Kowalski'
-  })
+  // const jkDoc = doc(db, 'users', 'JanKowalskiID');
+  // setDoc(jkDoc, {
+  //   name: 'Jan',
+  //   surname: 'Kowalski'
+  // })
 
 const imie = document.createElement('input');
 const nazwisko = document.createElement('input');
 const wiek = document.createElement('input');
+const przycisk = document.createElement('button');
 
 imie.setAttribute('type', 'text');
 nazwisko.setAttribute('type', 'text');
 wiek.setAttribute('type', 'number');
 
+imie.setAttribute('placeholder', 'imie');
+nazwisko.setAttribute('placeholder', 'nazwisko');
+wiek.setAttribute('placeholder', 'wiek');
+
+przycisk.innerText='wyślij';
+
 document.body.appendChild(imie);
 document.body.appendChild(nazwisko);
 document.body.appendChild(wiek);
+document.body.appendChild(przycisk);
 
+przycisk.addEventListener('click', () => {
+  const jkDoc = doc(db, 'users', `${imie.value}${nazwisko.value}${wiek.value}`);
+setDoc(jkDoc, {
+  name: imie.value,
+  surname: nazwisko.value,
+  age: wiek.value
+}).then(() => {
+  console.log("Sukces!")
+})
+})
 
