@@ -2,7 +2,7 @@ import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {doc, getFirestore, setDoc} from "firebase/firestore"
+import {doc, getDoc, getFirestore, setDoc} from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -461,14 +461,14 @@ document.body.appendChild(nowaLinia);
   //   surname: 'Kowalski'
   // })
 
-  const naglowek = document.createElement("h3");
-  naglowek.innerText = 'Wysyłanie dokumentu do bazy danych';
-  document.body.appendChild(naglowek);
+//   const naglowek = document.createElement("h3");
+//   naglowek.innerText = 'Wysyłanie dokumentu do bazy danych, ID z imienia+nazwiska+wieku';
+//   document.body.appendChild(naglowek);
 
 const imie = document.createElement('input');
 const nazwisko = document.createElement('input');
 const wiek = document.createElement('input');
-const przycisk = document.createElement('button');
+// const przycisk = document.createElement('button');
 
 imie.setAttribute('type', 'text');
 nazwisko.setAttribute('type', 'text');
@@ -478,21 +478,36 @@ imie.setAttribute('placeholder', 'imie');
 nazwisko.setAttribute('placeholder', 'nazwisko');
 wiek.setAttribute('placeholder', 'wiek');
 
-przycisk.innerText='wyślij';
+// przycisk.innerText='wyślij';
 
 document.body.appendChild(imie);
 document.body.appendChild(nazwisko);
 document.body.appendChild(wiek);
-document.body.appendChild(przycisk);
+// document.body.appendChild(przycisk);
 
-przycisk.addEventListener('click', () => {
-  const jkDoc = doc(db, 'users', `${imie.value}${nazwisko.value}${wiek.value}`);
-setDoc(jkDoc, {
-  name: imie.value,
-  surname: nazwisko.value,
-  age: wiek.value
-}).then(() => {
-  console.log("Sukces!");
+// przycisk.addEventListener('click', () => {
+//   const jkDoc = doc(db, 'users', `${imie.value}${nazwisko.value}${wiek.value}`);
+// setDoc(jkDoc, {
+//   name: imie.value,
+//   surname: nazwisko.value,
+//   age: wiek.value
+// }).then(() => {
+//   console.log("Sukces!");
+
+// });
+// });
+
+  const naglowek2 = document.createElement("h3");
+  naglowek2.innerText = 'Pobieranie z bazy danych osób';
+  document.body.appendChild(naglowek2);
+
+const LauraAster11 = doc(db, "users", "LauraAster11");
+getDoc(LauraAster11).then(dok => {
+  const zmienna = dok.data();
+  imie.value = zmienna.name;
+  nazwisko.value = zmienna.surname;
+  wiek.value = zmienna.age;
+  console.log(dok.data())
 })
-})
+
 
