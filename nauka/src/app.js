@@ -562,10 +562,10 @@ przycisk3.addEventListener('click', () => {
   name: imie3.value,
   surname: nazwisko3.value,
   age: wiek3.value
-})
 }).then(() => {
-   console.log("Sukces!");
-      imie.value = ''
-      nazwisko.value = ''
-      wiek.value = ''
+  console.log("Sukces!");
+      imie3.value = ''
+      nazwisko3.value = ''
+      wiek3.value = ''
 });
+})
