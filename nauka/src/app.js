@@ -2,7 +2,7 @@ import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {addDoc, collection, deleteField, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
+import {addDoc, collection, deleteDoc, deleteField, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -647,10 +647,10 @@ document.body.appendChild(listaUzytkownikow);
 
         btnDel.addEventListener('click', () => {
           const jkDoc = doc(db, "users", dok.id);
-          updateDoc(jkDoc, {
-          name: deleteField(),
-          
-        })
+          deleteDoc(jkDoc).then(() => {
+            console.log('usunięto');
+            listaUzytkownikow.removeChild(uzytkownik);
+          })
         });
       });
 
