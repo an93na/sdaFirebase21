@@ -610,13 +610,15 @@ const listaUzytkownikow = document.createElement('ol');
 btnList.innerText= 'wyświetl listę';
 btnEditUser.innerText= 'Edytuj użytkownika';
 
-// document.body.appendChild(btnList);
 document.body.appendChild(btnEditUser);
+document.body.appendChild(btnList);
 document.body.appendChild(listaUzytkownikow);
  
 
-// btnList.addEventListener('click', ()=> {
-  getDocs(collection(db, "users")).then((docs) => {
+btnList.addEventListener('click', ()=> {
+function generateUsersList() { 
+getDocs(collection(db, "users")).then((docs) => {
+    listaUzytkownikow.innerHTML= '';
     docs.forEach(dok => {
       // console.log(dok.data())
       const uzytkownik = document.createElement("li");
@@ -656,6 +658,8 @@ document.body.appendChild(listaUzytkownikow);
 
       
   });
+}
+generateUsersList()
 
       btnEditUser.addEventListener('click', ()=> {
       const jkDoc = doc(db, "users", naglowek5.innerText);
@@ -671,6 +675,6 @@ document.body.appendChild(listaUzytkownikow);
       naglowek5.innerText = '';
       });
       });
-// });
+});
 
 
