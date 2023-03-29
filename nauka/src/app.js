@@ -2,7 +2,7 @@ import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore"
+import {addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -640,15 +640,24 @@ document.body.appendChild(listaUzytkownikow);
       naglowek5.innerText = dok.id;
         });
       });
-  });
 
+      
+  });
+      btnEditUser.addEventListener('click', ()=> {
+      const jkDoc = doc(db, "users", naglowek5.innerText);
+      updateDoc(jkDoc, {
+       name: imie4.value,
+       surname: nazwisko4.value,
+       age: wiek4.value
+      }).then(() => {
+        console.log('sukces!');
+      imie4.value = '';
+      nazwisko4.value = '';
+      wiek4.value = '';
+      naglowek5.innerText = '';
+      })
+
+      })
 // });
 
 
-//zrobic funkcje updateDoc
-// const jkDoc = doc(db, "users", "IdJanaKowalskiego");
-// updateDoc(jkDoc, {
-//  name: "Jan",
-//  surname: "Kowalski",
-//  age: 50
-// })
