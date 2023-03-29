@@ -579,8 +579,25 @@ przycisk3.addEventListener('click', () => {
 
 
 const naglowek4 = document.createElement("h3");
-naglowek4.innerText = 'Wyświetlanie użytkowników z bazy danych';
+naglowek4.innerText = 'Wyświetlanie użytkowników z bazy danych i ich aktualizacja';
 document.body.appendChild(naglowek4);
+
+
+const imie4 = document.createElement('input');
+const nazwisko4 = document.createElement('input');
+const wiek4 = document.createElement('input');
+
+imie4.setAttribute('type', 'text');
+nazwisko4.setAttribute('type', 'text');
+wiek4.setAttribute('type', 'number');
+
+imie4.setAttribute('placeholder', 'imie');
+nazwisko4.setAttribute('placeholder', 'nazwisko');
+wiek4.setAttribute('placeholder', 'wiek');
+
+document.body.appendChild(imie4);
+document.body.appendChild(nazwisko4);
+document.body.appendChild(wiek4);
 
 const btnList = document.createElement('button');
 const listaUzytkownikow = document.createElement('ol');
@@ -606,8 +623,14 @@ document.body.appendChild(listaUzytkownikow);
 
       listaUzytkownikow.appendChild(uzytkownik);
       uzytkownik.appendChild(btnEdit);
+
+      btnEdit.addEventListener('click', ()=> {
+      imie4.value = myUser.name;
+      nazwisko4.value = myUser.surname;
+      wiek4.value = myUser.age
+        });
+      });
   });
- });
 
 // });
 
