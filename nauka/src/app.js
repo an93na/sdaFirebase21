@@ -690,6 +690,7 @@ const btnSearch = document.createElement('button');
 const inputImie = document.createElement('input');
 const ListPerson = document.createElement('ol');
 
+inputImie.setAttribute('placeholder', 'imie');
 btnSearch.innerText='szukaj';
 
 document.body.appendChild(inputImie);
@@ -705,9 +706,25 @@ btnSearch.addEventListener('click', ()=>{
     docs.forEach(myDoc => {
       const myUser = myDoc.data();
       const myLi = document.createElement("li");
-      myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`
+      myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`;
       ListPerson.appendChild(myLi);
     })
   })
-})
+});
+
+inputImie.addEventListener('keydown', (event)=>{
+  if(event.key === 'Enter') {
+  const users = collection(db, "users");
+  const usersQuery = query(users, where("name", "==", inputImie.value));
+
+  getDocs(usersQuery).then(docs => {
+    ListPerson.innerHTML ='';
+    docs.forEach(myDoc => {
+      const myUser = myDoc.data();
+      const myLi = document.createElement("li");
+      myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`;
+      ListPerson.appendChild(myLi);
+    })
+  })
+}})
 
