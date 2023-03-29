@@ -587,20 +587,29 @@ const listaUzytkownikow = document.createElement('ol');
 
 btnList.innerText= 'wyświetl listę';
 
-document.body.appendChild(btnList);
+// document.body.appendChild(btnList);
 document.body.appendChild(listaUzytkownikow);
 
-btnList.addEventListener('click', ()=> {
+// btnList.addEventListener('click', ()=> {
   getDocs(collection(db, "users")).then((docs) => {
     docs.forEach(dok => {
-      console.log(dok.data())
+      // console.log(dok.data())
       const uzytkownik = document.createElement("li");
-      uzytkownik.innerText = `${dok.data().name} ${dok.data().surname} ${dok.data().age}`;
+      const btnEdit= document.createElement("button");
+
+      const myUser = dok.data();
+      uzytkownik.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`;
+      btnEdit.innerText = 'edytuj'
+
+      btnEdit.style.padding = '5px'
+      btnEdit.style.margin = '5px'
+
       listaUzytkownikow.appendChild(uzytkownik);
+      uzytkownik.appendChild(btnEdit);
   });
  });
 
-});
+// });
 
 
 //zrobic funkcje updateDoc
