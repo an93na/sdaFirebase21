@@ -3,7 +3,7 @@ import './../styles/styles.css';
 import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import {addDoc, collection, deleteDoc, deleteField, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where} from "firebase/firestore"
-import { getDatabase, push, ref as rdbRef, set} from "firebase/database";
+import { getDatabase, onChildAdded, onValue, push, ref as rdbRef, set} from "firebase/database";
 
 
 
@@ -750,3 +750,47 @@ inputImie.addEventListener('keydown', (event)=>{
 //   surname: 'NowyKowalski'
 // })
 
+// nasłuchiwanie na zmainy na obiekcie
+// const usersRef = rdbRef(rdb, 'users');
+// onValue(usersRef, snapshot => {
+//   console.log(snapshot);
+//   const myUsers = snapshot.val();
+
+//   for(let prop in myUsers){
+//     console.log(prop)
+//   }
+// });
+
+const naglowek7 = document.createElement("h3");
+naglowek7.innerText = 'Mini chat';
+document.body.appendChild(naglowek7);
+
+const textarea = document.createElement('textarea');
+const btnWyslij = document.createElement('button');
+const messageContainer = document.createElement('div');
+
+btnWyslij.innerText= 'send';
+messageContainer.setAttribute('class', 'message')
+
+document.body.appendChild(textarea);
+document.body.appendChild(btnWyslij); 
+document.body.appendChild(messageContainer); 
+
+const messagesRef = rdbRef(rdb, 'message');
+
+onChildAdded(messagesRef, (messageSnapshot) => {
+  const mySpan = document.createElement('span');
+  const message = messageSnapshot.val();
+
+  mySpan.innerText = `${message.timestamp} --- ${message.text}`;
+  messageContainer.appendChild(mySpan);
+});
+
+btnWyslij.addEventListener('click', ()=> {
+  const messageRef = push(messagesRef);
+
+  set(messageRef, {
+    text: textarea.value,
+    timestamp: new Date().toISOString()
+  })
+})
