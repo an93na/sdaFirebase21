@@ -2,7 +2,7 @@ import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
+import {addDoc, collection, deleteField, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -621,28 +621,42 @@ document.body.appendChild(listaUzytkownikow);
       // console.log(dok.data())
       const uzytkownik = document.createElement("li");
       const btnEdit= document.createElement("button");
+      const btnDel= document.createElement("button");
 
       const myUser = dok.data();
       uzytkownik.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`;
       btnEdit.innerText = 'edytuj'
+      btnDel.innerText = 'usuń'
 
       btnEdit.style.padding = '5px'
       btnEdit.style.margin = '5px'
+      btnDel.style.padding = '5px'
+      btnDel.style.margin = '5px'
 
       listaUzytkownikow.appendChild(uzytkownik);
       uzytkownik.appendChild(btnEdit);
+      uzytkownik.appendChild(btnDel);
 
-      btnEdit.addEventListener('click', ()=> {
-      imie4.value = myUser.name;
-      nazwisko4.value = myUser.surname;
-      wiek4.value = myUser.age;
-      // console.log(dok.id)
-      naglowek5.innerText = dok.id;
+        btnEdit.addEventListener('click', ()=> {
+          imie4.value = myUser.name;
+          nazwisko4.value = myUser.surname;
+          wiek4.value = myUser.age;
+          // console.log(dok.id)
+          naglowek5.innerText = dok.id;
+          });
+
+        btnDel.addEventListener('click', () => {
+          const jkDoc = doc(db, "users", dok.id);
+          updateDoc(jkDoc, {
+          name: deleteField(),
+          
+        })
         });
       });
 
       
   });
+
       btnEditUser.addEventListener('click', ()=> {
       const jkDoc = doc(db, "users", naglowek5.innerText);
       updateDoc(jkDoc, {
@@ -655,9 +669,8 @@ document.body.appendChild(listaUzytkownikow);
       nazwisko4.value = '';
       wiek4.value = '';
       naglowek5.innerText = '';
-      })
-
-      })
+      });
+      });
 // });
 
 
