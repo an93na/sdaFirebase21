@@ -582,6 +582,10 @@ const naglowek4 = document.createElement("h3");
 naglowek4.innerText = 'Wyświetlanie użytkowników z bazy danych i ich aktualizacja';
 document.body.appendChild(naglowek4);
 
+const naglowek5 = document.createElement("h4");
+naglowek5.innerText = '';
+document.body.appendChild(naglowek5);
+
 
 const imie4 = document.createElement('input');
 const nazwisko4 = document.createElement('input');
@@ -599,13 +603,17 @@ document.body.appendChild(imie4);
 document.body.appendChild(nazwisko4);
 document.body.appendChild(wiek4);
 
+const btnEditUser = document.createElement('button');
 const btnList = document.createElement('button');
 const listaUzytkownikow = document.createElement('ol');
 
 btnList.innerText= 'wyświetl listę';
+btnEditUser.innerText= 'Edytuj użytkownika';
 
 // document.body.appendChild(btnList);
+document.body.appendChild(btnEditUser);
 document.body.appendChild(listaUzytkownikow);
+ 
 
 // btnList.addEventListener('click', ()=> {
   getDocs(collection(db, "users")).then((docs) => {
@@ -627,7 +635,9 @@ document.body.appendChild(listaUzytkownikow);
       btnEdit.addEventListener('click', ()=> {
       imie4.value = myUser.name;
       nazwisko4.value = myUser.surname;
-      wiek4.value = myUser.age
+      wiek4.value = myUser.age;
+      // console.log(dok.id)
+      naglowek5.innerText = dok.id;
         });
       });
   });
