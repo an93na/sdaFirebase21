@@ -3,10 +3,14 @@ import './../styles/styles.css';
 import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import {addDoc, collection, deleteDoc, deleteField, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where} from "firebase/firestore"
+import { getDatabase, push, ref as rdbRef, set} from "firebase/database";
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
   authDomain: "naukamoja-50dd4.firebaseapp.com",
+  databaseURL: "https://naukamoja-50dd4-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "naukamoja-50dd4",
   storageBucket: "naukamoja-50dd4.appspot.com",
   messagingSenderId: "149285652768",
@@ -18,7 +22,7 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Storage
 const storage = getStorage(app);
 const db = getFirestore(app);
-
+const rdb = getDatabase(app);
 
 // const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af";
 
@@ -727,4 +731,22 @@ inputImie.addEventListener('keydown', (event)=>{
     })
   })
 }})
+
+
+
+
+// zapisujemy za pomocą pobranej referencji i metody set
+// const janRef = rdbRef(rdb, 'users/JanId');
+// set(janRef, {
+//  name: "Jan",
+//  surname: "Kowalski"
+// });
+
+// dodawanie z automatycznie wygenerowanym ID
+// const usersRef = rdbRef(rdb, 'users');
+// const janRef = push(usersRef);
+// set(janRef, {
+//   name: 'NowyJan',
+//   surname: 'NowyKowalski'
+// })
 
