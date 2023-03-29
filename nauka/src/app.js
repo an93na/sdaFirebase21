@@ -2,7 +2,7 @@ import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {addDoc, collection, doc, getDoc, getFirestore, setDoc} from "firebase/firestore"
+import {addDoc, collection, doc, getDoc, getDocs, getFirestore, setDoc} from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -522,7 +522,7 @@ document.body.appendChild(wiek1);
 
 const LauraAster11 = doc(db, "users", "LauraAster11");
 getDoc(LauraAster11).then(dok => {
-  console.log(dok.data());
+  // console.log(dok.data());
 
   const zmienna = dok.data();
   imie1.value = zmienna.name;
@@ -564,8 +564,24 @@ przycisk3.addEventListener('click', () => {
   age: wiek3.value
 }).then(() => {
   console.log("Sukces!");
-      imie3.value = ''
-      nazwisko3.value = ''
-      wiek3.value = ''
+      imie3.value = '';
+      nazwisko3.value = '';
+      wiek3.value = '';
 });
-})
+});
+
+const naglowek4 = document.createElement("h3");
+naglowek4.innerText = 'Wyświetlanie użytkowników z bazy danych';
+document.body.appendChild(naglowek4);
+
+const listaUzytkownikow = document.createElement('ol');
+document.body.appendChild(listaUzytkownikow);
+
+getDocs(collection(db, "users")).then((docs) => {
+  docs.forEach(dok => {
+    console.log(dok.data())
+    const uzytkownik = document.createElement("li");
+    uzytkownik.innerText = `${dok.data().name} ${dok.data().surname} ${dok.data().age}`;
+    listaUzytkownikow.appendChild(uzytkownik);
+  })
+ })
