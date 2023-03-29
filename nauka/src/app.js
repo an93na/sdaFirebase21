@@ -651,7 +651,8 @@ getDocs(collection(db, "users")).then((docs) => {
           const jkDoc = doc(db, "users", dok.id);
           deleteDoc(jkDoc).then(() => {
             console.log('usunięto');
-            listaUzytkownikow.removeChild(uzytkownik);
+            // listaUzytkownikow.removeChild(uzytkownik);
+            generateUsersList();
           })
         });
       });
@@ -673,6 +674,7 @@ generateUsersList()
       nazwisko4.value = '';
       wiek4.value = '';
       naglowek5.innerText = '';
+      generateUsersList();
       });
       });
 });
