@@ -388,6 +388,8 @@ listAll(storageRef).then((res) => {
 //   })
 // });
 
+
+
 //Iterujemy sie po folderach
 const naglowek1 = document.createElement("h3");
 naglowek1.innerText = 'Wysyłanie dokumentu do wybranego albumu, wyświetlanie z wybranego albumu';
@@ -461,6 +463,8 @@ document.body.appendChild(nowaLinia);
   //   surname: 'Kowalski'
   // })
 
+
+
 const naglowek = document.createElement("h3");
 naglowek.innerText = 'Wysyłanie dokumentu do bazy danych, ID z imienia+nazwiska+wieku';
 document.body.appendChild(naglowek);
@@ -499,6 +503,8 @@ setDoc(jkDoc, {
 
 });
 });
+
+
 
 const naglowek2 = document.createElement("h3");
 naglowek2.innerText = 'Pobieranie z bazy danych osób po ID, które znamy';
@@ -570,18 +576,37 @@ przycisk3.addEventListener('click', () => {
 });
 });
 
+
+
 const naglowek4 = document.createElement("h3");
 naglowek4.innerText = 'Wyświetlanie użytkowników z bazy danych';
 document.body.appendChild(naglowek4);
 
+const btnList = document.createElement('button');
 const listaUzytkownikow = document.createElement('ol');
+
+btnList.innerText= 'wyświetl listę';
+
+document.body.appendChild(btnList);
 document.body.appendChild(listaUzytkownikow);
 
-getDocs(collection(db, "users")).then((docs) => {
-  docs.forEach(dok => {
-    console.log(dok.data())
-    const uzytkownik = document.createElement("li");
-    uzytkownik.innerText = `${dok.data().name} ${dok.data().surname} ${dok.data().age}`;
-    listaUzytkownikow.appendChild(uzytkownik);
-  })
- })
+btnList.addEventListener('click', ()=> {
+  getDocs(collection(db, "users")).then((docs) => {
+    docs.forEach(dok => {
+      console.log(dok.data())
+      const uzytkownik = document.createElement("li");
+      uzytkownik.innerText = `${dok.data().name} ${dok.data().surname} ${dok.data().age}`;
+      listaUzytkownikow.appendChild(uzytkownik);
+  });
+ });
+
+});
+
+
+//zrobic funkcje updateDoc
+// const jkDoc = doc(db, "users", "IdJanaKowalskiego");
+// updateDoc(jkDoc, {
+//  name: "Jan",
+//  surname: "Kowalski",
+//  age: 50
+// })
