@@ -680,3 +680,9 @@ generateUsersList()
 });
 
 
+
+
+const naglowek6 = document.createElement("h3");
+naglowek6.innerText = 'Wyszukanie użytkowników po imieniu';
+document.body.appendChild(naglowek6);
+
