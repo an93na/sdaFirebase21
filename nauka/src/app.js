@@ -2,7 +2,7 @@ import './../styles/styles.css';
 
 import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import {addDoc, collection, deleteDoc, deleteField, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc} from "firebase/firestore"
+import {addDoc, collection, deleteDoc, deleteField, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where} from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXJWy6s_1p1qdH7qDvwUdo4wNZBMg1ASA",
@@ -685,4 +685,29 @@ generateUsersList()
 const naglowek6 = document.createElement("h3");
 naglowek6.innerText = 'Wyszukanie użytkowników po imieniu';
 document.body.appendChild(naglowek6);
+
+const btnSearch = document.createElement('button');
+const inputImie = document.createElement('input');
+const ListPerson = document.createElement('ol');
+
+btnSearch.innerText='szukaj';
+
+document.body.appendChild(inputImie);
+document.body.appendChild(btnSearch);
+document.body.appendChild(ListPerson);
+
+btnSearch.addEventListener('click', ()=>{
+  const users = collection(db, "users");
+  const usersQuery = query(users, where("name", "==", inputImie.value));
+
+  getDocs(usersQuery).then(docs => {
+    ListPerson.innerHTML ='';
+    docs.forEach(myDoc => {
+      const myUser = myDoc.data();
+      const myLi = document.createElement("li");
+      myLi.innerText = `${myUser.name} ${myUser.surname} ${myUser.age}`
+      ListPerson.appendChild(myLi);
+    })
+  })
+})
 
