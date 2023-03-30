@@ -813,12 +813,12 @@ ui.start('#firebaseui-auth-container', {
     naglowek7.style.display="block";
     textarea.style.display="block";
     btnWyslij.style.display="inline-block";
-    messageContainer.display="flex"; 
+    messageContainer.style.display="flex"; 
   } else {
     naglowek7.style.display="none";
     textarea.style.display="none";
     btnWyslij.style.display="none";
-    messageContainer.display="none"; 
+    messageContainer.style.display="none"; 
   }
  });
  
