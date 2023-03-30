@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import {addDoc, collection, deleteDoc, deleteField, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where} from "firebase/firestore"
 import { getDatabase, onChildAdded, onValue, push, ref as rdbRef, set} from "firebase/database";
-import { getAuth, EmailAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, EmailAuthProvider, onAuthStateChanged, GoogleAuthProvider, signOut } from "firebase/auth";
 import * as firebaseui from 'firebaseui';
 
 
@@ -161,7 +161,7 @@ const ui = new firebaseui.auth.AuthUI(auth);
 //  console.log(item.name);
 //  })
 // })
-
+// function wyswietl() {
 //Lista numerowana na stronie z nazwami plików
 const ol = document.createElement('ol');
 ol.setAttribute('id', 'listaNumerowana');
@@ -799,26 +799,46 @@ btnWyslij.addEventListener('click', ()=> {
     timestamp: new Date().toISOString()
   });
 });
-
+// }
 
 ui.start('#firebaseui-auth-container', {
   signInOptions: [
-  EmailAuthProvider.PROVIDER_ID
+  EmailAuthProvider.PROVIDER_ID,
+  GoogleAuthProvider.PROVIDER_ID
   ],
   signInSuccessUrl: "http://localhost:8080/"
  });
 
  onAuthStateChanged(auth, (user) => {
   if (user) {
+    
+    // wyswietl();
     naglowek7.style.display="block";
     textarea.style.display="block";
     btnWyslij.style.display="inline-block";
+    btnWyloguj.style.display="inline-block";
     messageContainer.style.display="flex"; 
   } else {
     naglowek7.style.display="none";
     textarea.style.display="none";
     btnWyslij.style.display="none";
-    messageContainer.style.display="none"; 
+    btnWyloguj.style.display="none";
+    messageContainer.style.display="none";
   }
- });
- 
+});
+
+const btnWyloguj = document.createElement('button');
+btnWyloguj.innerText = 'wyloguj';
+document.body.appendChild(btnWyloguj); 
+
+btnWyloguj.addEventListener('click', () => {
+  signOut(auth).then(() => {
+    console.log("Wylogowano!");
+    const infwyl = document.createElement("h2");
+    infwyl.innerText = 'Nastąpiło wylogowanie!';
+    setTimeout(() => {
+      infwyl.innerText = '';
+    }, 500);
+    document.body.appendChild(infwyl);
+   });
+});
