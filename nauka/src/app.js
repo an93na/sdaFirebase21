@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import {addDoc, collection, deleteDoc, deleteField, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where} from "firebase/firestore"
 import { getDatabase, onChildAdded, onValue, push, ref as rdbRef, set} from "firebase/database";
-import { getAuth, EmailAuthProvider } from "firebase/auth";
+import { getAuth, EmailAuthProvider, onAuthStateChanged } from "firebase/auth";
 import * as firebaseui from 'firebaseui';
 
 
@@ -806,3 +806,11 @@ ui.start('#firebaseui-auth-container', {
   ],
   signInSuccessUrl: "http://localhost:8080/"
  });
+
+ onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log(user)
+  } else {
+  }
+ });
+ 
