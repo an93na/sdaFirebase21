@@ -797,5 +797,12 @@ btnWyslij.addEventListener('click', ()=> {
   set(messageRef, {
     text: textarea.value,
     timestamp: new Date().toISOString()
-  })
-})
+  });
+});
+
+ui.start('#firebaseui-auth-container', {
+  signInOptions: [
+  EmailAuthProvider.PROVIDER_ID
+  ],
+  signInSuccessUrl: "http://localhost:8080/"
+ });
