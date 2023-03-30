@@ -4,7 +4,8 @@ import { initializeApp } from "firebase/app";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import {addDoc, collection, deleteDoc, deleteField, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where} from "firebase/firestore"
 import { getDatabase, onChildAdded, onValue, push, ref as rdbRef, set} from "firebase/database";
-
+import { getAuth, EmailAuthProvider } from "firebase/auth";
+import * as firebaseui from 'firebaseui';
 
 
 const firebaseConfig = {
@@ -23,6 +24,10 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 const db = getFirestore(app);
 const rdb = getDatabase(app);
+
+const auth = getAuth(app);
+const ui = new firebaseui.auth.AuthUI(auth);
+
 
 // const url = "https://firebasestorage.googleapis.com/v0/b/naukamoja-50dd4.appspot.com/o/1.jpg?alt=media&token=01267ef1-a84d-4c62-995d-1a53f27aa0af";
 
