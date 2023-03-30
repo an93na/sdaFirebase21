@@ -800,6 +800,7 @@ btnWyslij.addEventListener('click', ()=> {
   });
 });
 
+
 ui.start('#firebaseui-auth-container', {
   signInOptions: [
   EmailAuthProvider.PROVIDER_ID
@@ -809,8 +810,15 @@ ui.start('#firebaseui-auth-container', {
 
  onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log(user)
+    naglowek7.style.display="block";
+    textarea.style.display="block";
+    btnWyslij.style.display="inline-block";
+    messageContainer.display="flex"; 
   } else {
+    naglowek7.style.display="none";
+    textarea.style.display="none";
+    btnWyslij.style.display="none";
+    messageContainer.display="none"; 
   }
  });
  
