@@ -806,7 +806,7 @@ ui.start('#firebaseui-auth-container', {
   EmailAuthProvider.PROVIDER_ID,
   GoogleAuthProvider.PROVIDER_ID
   ],
-  signInSuccessUrl: "http://localhost:8080/"
+  signInSuccessUrl: "https://naukamoja-50dd4.web.app/"
  });
 
  onAuthStateChanged(auth, (user) => {
